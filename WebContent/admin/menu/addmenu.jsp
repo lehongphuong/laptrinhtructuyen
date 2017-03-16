@@ -10,12 +10,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Add_Account</title>
 
-<link href="admin/css/bootstrap.min.css" rel="stylesheet">
-<link href="admin/css/datepicker3.css" rel="stylesheet">
-<link href="admin/css/bootstrap-table.css" rel="stylesheet">
-<link href="admin/css/styles.css" rel="stylesheet">
-<link href="admin/css/table.css" rel="stylesheet">
-<link href="admin/css/font-awesome.min.css" rel="stylesheet">
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/datepicker3.css" rel="stylesheet">
+<link href="../css/bootstrap-table.css" rel="stylesheet">
+<link href="../css/styles.css" rel="stylesheet">
+<link href="../css/table.css" rel="stylesheet">
+<link href="../css/font-awesome.min.css" rel="stylesheet">
 
 
 <!--Icons-->
@@ -29,16 +29,16 @@
       <!-- Bootstrap core CSS -->
       <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
       <!-- Material Design Bootstrap -->
-      <link href="admin/lib/css/mdb.min.css" rel="stylesheet">
+      <link href="../lib/css/mdb.min.css" rel="stylesheet">
       <!-- Your custom styles (optional) -->
-      <link href="admin/lib/css/style.css" rel="stylesheet">
+      <link href="../lib/css/style.css" rel="stylesheet">
       
       <!-- JQuery -->
-      <script type="text/javascript" src="admin/lib/js/jquery-3.1.1.min.js"></script>
+      <script type="text/javascript" src="../lib/js/jquery-3.1.1.min.js"></script>
       <!-- Bootstrap tooltips -->
-      <script type="text/javascript" src="admin/lib/js/tether.min.js"></script>
+      <script type="text/javascript" src="../lib/js/tether.min.js"></script>
       <!-- MDB core JavaScript -->
-      <script type="text/javascript" src="admin/lib/js/mdb.min.js"></script>
+      <script type="text/javascript" src="../lib/js/mdb.min.js"></script>
  <!--/libary -->
 
 </head>
@@ -71,8 +71,8 @@
 		<ul class="nav menu">
 			<li><a href="index.html"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg>Trang chủ</a></li>
 			<li><a href="account.html"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg>Account</a></li>
-			<li class="active"><a href="category.html"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg>Category</a></li>
-			<li><a href="menu.html"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg>Menu</a></li>
+			<li ><a href="category.html"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg>Category</a></li>
+			<li class="active"><a href="menu.html"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg>Menu</a></li>
 			<li><a href="subject.html"><svg class="glyph stroked table"><use xlink:href="#stroked-table"></use></svg>Subject</a></li>
 			<li><a href="problem.html"><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg>Problem</a></li>
 			<li><a href="editorial.html"><svg class="glyph stroked star"><use xlink:href="#stroked-star"></use></svg>Editorial</a></li>
@@ -105,19 +105,20 @@
 					<div class="panel-heading">Add menu</div>
 					<div class="panel-body">
 						<div class="col-md-6">
-							<form role="form">
-							
+							<html:form action="/add-menu.do" method="post">
+
 								<div class="form-group">
 									<label>Name</label>
-									<input class="form-control" placeholder="Nhập tên">
+									<html:text styleClass="form-control" 
+										property="name" ></html:text>
 									<label>positive</label>
-									<input class="form-control" placeholder="Nhập tên">
+									<html:text styleClass="form-control"
+										  property="positive"></html:text>
 								</div>
-								<button type="submit" class="btn btn-primary">Add</button>
-								<button type="reset" class="btn btn-default">Cancel</button>
-							</div>							
+								<html:submit styleClass="btn btn-primary">Add</html:submit>
+								<button type="reset" class="btn btn-default">Cancel</button></div>								
 								
-						</form>
+							</html:form>
 					</div>
 				</div>
 			</div><!-- /.col-->
@@ -125,14 +126,15 @@
 		
 	</div><!--/.main-->
 
-	<script src="admin/js/jquery-1.11.1.min.js"></script>
-	<script src="admin/js/bootstrap.min.js"></script>
-	<script src="admin/js/chart.min.js"></script>
-	<script src="admin/js/chart-data.js"></script>
-	<script src="admin/js/easypiechart.js"></script>
-	<script src="admin/js/easypiechart-data.js"></script>
-	<script src="admin/js/bootstrap-datepicker.js"></script>
-	<script src="admin/js/bootstrap-table.js"></script>
+	
+	<script src="../js/jquery-1.11.1.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/chart.min.js"></script>
+	<script src="../js/chart-data.js"></script>
+	<script src="../js/easypiechart.js"></script>
+	<script src="../js/easypiechart-data.js"></script>
+	<script src="../js/bootstrap-datepicker.js"></script>
+	<script src="../js/bootstrap-table.js"></script>
 	<script>
 		!function ($) {
 			$(document).on("click","ul.nav li.parent > a > span.icon", function(){		  

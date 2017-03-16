@@ -8,16 +8,26 @@ import model.bean.Menu;
 import org.apache.struts.action.ActionForm;
 
 public class HomeForm extends ActionForm {
-	private int userId;
+	private String userId;
 	private String username;
 	private String password;
 	private String avatar;
 	private String university;
-	private float point;
+	private String point;
 	private String typeUser;
 
 	private ArrayList<Menu> menuList;
 	private ArrayList<Categories> cateList;
+
+	private String statusLogin;
+
+	public String getStatusLogin() {
+		return statusLogin;
+	}
+
+	public void setStatusLogin(String statusLogin) {
+		this.statusLogin = statusLogin;
+	}
 
 	public ArrayList<Menu> getMenuList() {
 		return menuList;
@@ -33,14 +43,6 @@ public class HomeForm extends ActionForm {
 
 	public void setCateList(ArrayList<Categories> cateList) {
 		this.cateList = cateList;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
 	}
 
 	public String getUsername() {
@@ -71,16 +73,24 @@ public class HomeForm extends ActionForm {
 		return university;
 	}
 
-	public void setUniversity(String university) {
-		this.university = university;
+	public String getUserId() {
+		return userId;
 	}
 
-	public float getPoint() {
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getPoint() {
 		return point;
 	}
 
-	public void setPoint(float point) {
+	public void setPoint(String point) {
 		this.point = point;
+	}
+
+	public void setUniversity(String university) {
+		this.university = university;
 	}
 
 	public String getTypeUser() {

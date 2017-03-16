@@ -44,13 +44,13 @@
          <nav class="navbar navbar-toggleable-md navbar-dark scrolling-navbar double-nav fixed-top">
             <!-- SideNav slide-out button -->
             <div class="float-xs-left">
-               <a href="home.html"><img style="margin-left:20px" src="img/custom/logo.png"/></a>
+               <a href="home.do"><img style="margin-left:20px" src="img/custom/logo.png"/></a>
             </div>
             <!-- Breadcrumb-->
             <div class="breadcrumb-dn mr-auto">
                <bold>
-                  <a class="nav-link" href="index.html">
-                     <p>Lớp học lập trình trực tuyến</p>
+                  <a class="nav-link" href="home.do">
+                     <bold><h6>CODING PROGRAM</h6></bold>
                   </a>
                </bold>
             </div>
@@ -60,31 +60,62 @@
               	
               	 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fa fa-user"></i> <span class="hidden-sm-down"><bean:write name="menu" property="name"/></span>
+                   <span class="hidden-sm-down uppercase"><bean:write name="menu" property="name"/></span>
                   </a>
                   <bean:define id="menuId" name="menu" property="menuId"></bean:define>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
 	              <logic:iterate name="homeForm" property="cateList" id="cate">
 		              	<logic:equal name="cate" property="menuId" value="${menuId}" >
-	                		<a class="dropdown-item" href="#"><bean:write name="cate" property="name"/></a>
+		              		<bean:define id="idMenu" name="cate" property="menuId"></bean:define>
+		              		<bean:define id="idCate" name="cate" property="cateId"></bean:define>
+	                		<html:link styleClass="dropdown-item" 
+	                		action="/home-to-practics.do?menuId=${idMenu}&cateId=${idCate}">
+	                		<span class="uppercase"><bean:write name="cate" property="name"/></span>
+	                		</html:link>
 	                	</logic:equal>
 	            	</logic:iterate>
             	</div>
                </li>
               </logic:iterate>
               
-              
-              
-              <li class="nav-item dropdown">
+              <logic:equal name="homeForm" property="statusLogin" value="notLogin">
+              	<li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fa fa-user"></i> <span class="hidden-sm-down">Account</span>
+                  <i class="fa fa-user"></i> <span class="hidden-sm-down">ACCOUNT</span>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                     <a class="dropdown-item"  data-toggle="modal" data-target="#modal-login">Login</a>
-                     <a class="dropdown-item" data-toggle="modal" data-target="#modal-register">Register</a>
+                     <a class="dropdown-item"  data-toggle="modal" data-target="#modal-login">LOGIN</a>
+                     <a class="dropdown-item" data-toggle="modal" data-target="#modal-register">REGISTER</a>
                   </div>
                </li>
-
+              </logic:equal>
+              
+               <logic:equal name="homeForm" property="statusLogin" value="login">
+              	<li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-user"></i> <span class="hidden-sm-down">
+                  <span class="uppercase"> WELCOME <bean:write name="homeForm" property="username"/> </span>
+						
+				</span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                  	<html:link action="/user-logout.do" styleClass="dropdown-item">LOGOUT</html:link>
+                  </div>
+               </li>
+              </logic:equal>  
+              
+              <logic:equal name="homeForm" property="statusLogin" value="fail">
+               <!-- Modal Login -->
+              	<li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-user"></i> <span class="hidden-sm-down">LOGIN FAIL PLEASE AGAIN</span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                     <a class="dropdown-item"  data-toggle="modal" data-target="#modal-login">LOGIN</a>
+                     <a class="dropdown-item" data-toggle="modal" data-target="#modal-register">LOGOUT</a>
+                  </div>
+               </li>
+              </logic:equal>          
 
             </ul>
          </nav>
@@ -104,25 +135,27 @@
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                       </button>
-                      <h3 class="w-100"><i class="fa fa-user"></i> Login</h3>
+                      <h3 class="w-100"><i class="fa fa-user"></i>Login</h3>
                   </div>
                   <!--Body-->
-                  <div class="modal-body">
-                      <div class="md-form">
-                          <i class="fa fa-envelope prefix"></i>
-                          <input type="text" id="form2" class="form-control">
-                          <label for="form2">Your email</label>
-                      </div>
-
-                      <div class="md-form">
-                          <i class="fa fa-lock prefix"></i>
-                          <input type="password" id="form3" class="form-control">
-                          <label for="form3">Your password</label>
-                      </div>
-                      <div class="text-center">
-                          <button class="btn btn-primary btn-lg">Login</button>
-                      </div>
-                  </div>
+                  <html:form action="/user-login">
+                  		<div class="modal-body">
+	                      <div class="md-form">
+	                          <i class="fa fa-envelope prefix"></i>
+	                          <html:text property="username" styleId="form2" styleClass="form-control"></html:text>
+	                          <label for="form2">Your email</label>
+	                      </div>
+	
+	                      <div class="md-form">
+	                          <i class="fa fa-lock prefix"></i>
+	                          <html:password property="password" styleId="form3" styleClass="form-control"></html:password>
+	                          <label for="form3">Your password</label>
+	                      </div>
+	                      <div class="text-center">
+	                          <html:submit styleClass="btn btn-primary btn-md">Login</html:submit>
+	                      </div>
+	                  </div>
+                  </html:form>
                   <!--Footer-->
                   <div class="modal-footer">
                       <div class="options text-right">
@@ -284,7 +317,7 @@
                       <h5 class="title">My's name team</h5>
                       <ul>
                           <li><a href="#!">Lê Hồng Phương</a></li>
-                          <li><a href="#!">Võ Thị Thu Hiền</a></li>
+                          <li><a href="#!">Võ Thị Ngọc Hiền©</a></li>
                           <li><a href="#!">Nguyễn Thị Nương</a></li>
                           <li><a href="#!">Võ Văn Hòa</a></li>
                           <li><a href="#!">Nguyễn Duy Thức</a></li>

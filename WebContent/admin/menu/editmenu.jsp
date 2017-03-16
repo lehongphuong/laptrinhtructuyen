@@ -68,10 +68,10 @@
 		
 	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<ul class="nav menu">
-			<li><a href="index.html"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg>Trang chá»§</a></li>
+			<li><a href="index.html"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg>Trang chủ</a></li>
 			<li><a href="account.html"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg>Account</a></li>
-			<li class="active"><a href="category.html"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg>Category</a></li>
-			<li><a href="menu.html"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg>Menu</a></li>
+			<li ><a href="category.html"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg>Category</a></li>
+			<li class="active"><a href="menu.html"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg>Menu</a></li>
 			<li><a href="subject.html"><svg class="glyph stroked table"><use xlink:href="#stroked-table"></use></svg>Subject</a></li>
 			<li><a href="problem.html"><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg>Problem</a></li>
 			<li><a href="editorial.html"><svg class="glyph stroked star"><use xlink:href="#stroked-star"></use></svg>Editorial</a></li>
@@ -104,19 +104,22 @@
 					<div class="panel-heading">Edit menu</div>
 					<div class="panel-body">
 						<div class="col-md-6">
-							<form role="form">
+						
+							<html:form action="/update-menu.do">
 							
 								<div class="form-group">
+									<label>Id</label>
+									<html:text styleClass="form-control" property="menuId" readonly="true"  ></html:text>
 									<label>Name</label>
-									<input class="form-control" value="Láº­p trÃ¬nh PHP">
-									<label>positive</label>
-									<input class="form-control" value="Láº­p trÃ¬nh PHP">
+									<html:text styleClass="form-control" property="name"  ></html:text>
+									<label>Positive</label>
+									<html:text styleClass="form-control" property="positive" ></html:text>
 								</div>
 								<button type="submit" class="btn btn-primary">Edit</button>
 								<button type="reset" class="btn btn-default">Cancel</button>
 							</div>							
 								
-						</form>
+						</html:form>
 					</div>
 				</div>
 			</div><!-- /.col-->

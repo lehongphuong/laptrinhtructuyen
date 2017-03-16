@@ -1,8 +1,11 @@
+<%@page import="model.bean.Status"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
+
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -53,12 +56,12 @@
          <nav class="navbar navbar-toggleable-md navbar-dark scrolling-navbar double-nav fixed-top">
             <!-- SideNav slide-out button -->
             <div class="float-xs-left">
-               <a href="home.html"><img style="margin-left:20px" src="img/custom/logo.png"/></a>
+               <a href="home.do"><img style="margin-left:20px" src="img/custom/logo.png"/></a>
             </div>
             <!-- Breadcrumb-->
             <div class="breadcrumb-dn mr-auto">
                <bold>
-                  <a class="nav-link" href="index.html">
+                  <a class="nav-link" href="home.do">
                      <bold><h6>CODING PROGRAM</h6></bold>
                   </a>
                </bold>
@@ -66,73 +69,211 @@
             <div class="menuHori">
             <ul class="nav navbar-nav ml-auto flex-row">
 
-               <li class="nav-item">
-                  <a class="nav-link" href="khoahoc.html"> <span class="hidden-sm-down">ARGORITHM</span></a>
-               </li>
-
-               <li class="nav-item">
-                  <a class="nav-link" href="khoahoc.html"> <span class="hidden-sm-down">STRING</span></a>
-               </li>
-
-               <li class="nav-item">
-                  <a class="nav-link" href="khoahoc.html"> <span class="hidden-sm-down">ARRAYS</span></a>
-               </li>
-
-               <li class="nav-item">
-                  <a class="nav-link" href="khoahoc.html"> <span class="hidden-sm-down">GRAPH</span></a>
-               </li>
-
-               <li class="nav-item">
-                  <a class="nav-link" href="khoahoc.html"> <span class="hidden-sm-down">GREEDY</span></a>
-               </li>
-
-               <li class="nav-item">
-                  <a class="nav-link" href="khoahoc.html"> <span class="hidden-sm-down">TREE</span></a>
-               </li>
-
-               <li class="nav-item">
-                  <a class="nav-link" href="khoahoc.html"> <span class="hidden-sm-down">DYNAMIC PROGRAM</span></a>
-               </li>
-
-               <li class="nav-item">
-                  <a class="nav-link" href="khoahoc.html"> <span class="hidden-sm-down">BIT</span></a>
-               </li>
-
-               <li class="nav-item">
-                  <a class="nav-link" href="khoahoc.html"> <span class="hidden-sm-down">RESCUTION</span></a>
-               </li>
+               
+			 <bean:define id="idMenu" name="practicsForm" property="menuId"></bean:define>
+             <bean:define id="idCate" name="practicsForm" property="cateId"></bean:define>
+             <logic:iterate name="practicsForm" property="cateList" id="cate">
+             
+             		<bean:define id="cateId1" name="cate" property="cateId"></bean:define>
+             		
+	              	<logic:equal name="cate" property="menuId" value="${idMenu}">
+	              		
+	              		<logic:equal name="practicsForm" property="cateId" value="${cateId1}">
+	              		<li class="nav-item menuActive" >
+			                 <html:link 
+	                		action="home-to-practics.do?menuId=${idMenu}&cateId=${cateId1}">
+	                		 <span class="hidden-sm-down uppercase"  ><bean:write name="cate" property="name"/></span>
+	                		</html:link>
+		               </li>
+	              		</logic:equal>
+	              		
+	              		<logic:notEqual name="practicsForm" property="cateId" value="${cateId1 }">
+	              		<li class="nav-item" >
+			                 <html:link  
+	                		action="home-to-practics.do?menuId=${idMenu}&cateId=${cateId1}">
+	                		 <span class="hidden-sm-down uppercase"  ><bean:write name="cate" property="name"/></span>
+	                		</html:link>
+		               </li>
+	              		</logic:notEqual>
+                		
+                	</logic:equal>
+            	</logic:iterate>
 
 
-               <li class="nav-item dropdown">
+               <logic:equal name="practicsForm" property="statusLogin" value="notLogin">
+              	<li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fa fa-user"></i> <span class="hidden-sm-down">ACCOUNT</span>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                     <a class="dropdown-item" href="#">LOGIN</a>
-                     <a class="dropdown-item" href="#">REGISTER</a>
+                     <a class="dropdown-item"  data-toggle="modal" data-target="#modal-login">LOGIN</a>
+                     <a class="dropdown-item" data-toggle="modal" data-target="#modal-register">REGISTER</a>
                   </div>
                </li>
-               </ul>
+              </logic:equal>
+              
+               <logic:equal name="practicsForm" property="statusLogin" value="login">
+              	<li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-user"></i> <span class="hidden-sm-down">
+                  <span class="uppercase"> WELCOME <bean:write name="practicsForm" property="username"/> </span>
+						
+				</span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                  	<html:link action="/user-logout.do" styleClass="dropdown-item">LOGOUT</html:link>
+                  </div>
+               </li>
+              </logic:equal>  
+              
+              <logic:equal name="practicsForm" property="statusLogin" value="fail">
+               <!-- Modal Login -->
+              	<li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-user"></i> <span class="hidden-sm-down">LOGIN FAIL PLEASE AGAIN</span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                     <a class="dropdown-item"  data-toggle="modal" data-target="#modal-login">LOGIN</a>
+                     <a class="dropdown-item" data-toggle="modal" data-target="#modal-register">LOGOUT</a>
+                  </div>
+               </li>
+              </logic:equal>
 
             </div>
          </nav>
          <!-- /.Navbar -->
       </header>
       <!--Main layout-->
+      
+      
+      
+      <!-- Modal Login -->
+      <div class="modal fade modal-ext" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <!--Content-->
+              <div class="modal-content">
+                  <!--Header-->
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                      <h3 class="w-100"><i class="fa fa-user"></i> Login</h3>
+                  </div>
+                  <!--Body-->
+                  <html:form action="/user-login">
+                  		<div class="modal-body">
+	                      <div class="md-form">
+	                          <i class="fa fa-envelope prefix"></i>
+	                          <html:text property="username" styleId="form2" styleClass="form-control"></html:text>
+	                          <label for="form2">Your email</label>
+	                      </div>
+	
+	                      <div class="md-form">
+	                          <i class="fa fa-lock prefix"></i>
+	                          <html:password property="password" styleId="form3" styleClass="form-control"></html:password>
+	                          <label for="form3">Your password</label>
+	                      </div>
+	                      <div class="text-center">
+	                          <html:submit styleClass="btn btn-primary btn-md">Login</html:submit>
+	                      </div>
+	                  </div>
+                  </html:form>
+                  <!--Footer-->
+                  <div class="modal-footer">
+                      <div class="options text-right">
+                          <p>Not a member? <a href="#">Sign Up</a></p>
+                          <p>Forgot <a href="#">Password?</a></p>
+                      </div>
+                      <button type="button" class="btn btn-default ml-auto" data-dismiss="modal">Close</button>
+                  </div>
+              </div>
+              <!--/.Content-->
+          </div>
+      </div>
+
+
+                           
+      <!-- Modal Register -->
+      <div class="modal fade modal-ext" id="modal-register" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <!--Content-->
+              <div class="modal-content">
+                  <!--Header-->
+                  <div class="modal-header flex-column">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                      <h3 class="w-100"><i class="fa fa-user"></i> Register with:</h3>
+                      <div class="flex-row">
+                          <a href="" class="btn-floating btn-fb btn-small"><i class="fa fa-facebook"></i></a>
+                          <a href="" class="btn-floating btn-tw btn-small"><i class="fa fa-twitter"></i></a>
+                          <a href="" class="btn-floating btn-gplus btn-small"><i class="fa fa-google-plus"></i></a>
+                          <a href="" class="btn-floating btn-li btn-small"><i class="fa fa-linkedin"></i></a>
+                          <a href="" class="btn-floating btn-git btn-small"><i class="fa fa-github"></i></a>
+                      </div>
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body">
+                      <div class="md-form">
+                          <i class="fa fa-envelope prefix"></i>
+                          <input type="text" id="form2" class="form-control">
+                          <label for="form2">Your email</label>
+                      </div>
+
+                      <div class="md-form">
+                          <i class="fa fa-lock prefix"></i>
+                          <input type="password" id="form3" class="form-control">
+                          <label for="form3">Your password</label>
+                      </div>
+
+                      <div class="md-form">
+                          <i class="fa fa-lock prefix"></i>
+                          <input type="password" id="form4" class="form-control">
+                          <label for="form4">Repeat password</label>
+                      </div>
+
+                      <div class="text-center">
+                          <button class="btn btn-primary btn-lg">Sign up</button>
+
+                          <fieldset class="form-group">
+                              <input type="checkbox" id="checkbox1">
+                              <label for="checkbox1">Subscribe me to the newsletter</label>
+                          </fieldset>
+                      </div>
+                  </div>
+                  <!--Footer-->
+                  <div class="modal-footer">
+                      <div class="options">
+                          <p>Already have an account? <a href="#">Log in</a></p>
+                      </div>
+                      <button type="button" class="btn btn-default ml-auto" data-dismiss="modal">Close</button>
+                  </div>
+              </div>
+              <!--/.Content-->
+          </div>
+      </div>
+      
 
          
       <div class="container" style="margin-top:100px">
 
       <div style="float:right;  font-size:20px; margin-bottom:25px" class="row-lg-12">
-         <button type="button" class="btn btn-outline-warning waves-effect">Points: 2401.27 Rank: 3838</button>
+         <button type="button" class="btn btn-outline-warning waves-effect">
+         Points: <bean:write name="practicsForm" property="point"/>
+         Rank: <bean:write name="practicsForm" property="rank"/> </button>
          
          <hr>
       </div>
-
-
-
-      <div class="row-lg-12 clearfix" style="margin-top:10px">
+      
+      <logic:iterate name="practicsForm" property="subList" id="sub">
+      	<bean:define id="subId" name="sub" property="subId"></bean:define>
+    	<bean:define id="successRate" name="sub" property="successRate"></bean:define>
+    	<bean:define id="maxScore" name="sub" property="maxScore"></bean:define>
+    	
+    		
+    	<div class="row-lg-12 clearfix" style="margin-top:10px">
          <!--Card Light-->
+         
             <div class="card hoverable">
                 <!--Card content-->
                 <div class="card-block">
@@ -141,29 +282,52 @@
                     <!--Title-->
                     <h4 class="card-title">
                     <span><i class="fa fa-share-alt"></i></span>
-                    Solve Me First</h4>
+                    <bean:write name="sub" property="title"/>
+                    </h4>
                     <hr>
                     <!--Text-->
                     <div class="row-lg-12">
                         <div class="col-lg-5">
                         <p class="card-text" style="margin-top:15px">
-                           <span>Success Rate: 97.57% </span>
-                           <span>Max Score: 1 </span> 
-                           <span>Difficulty: Easy</span>
+                           <span>Success Rate: ${ successRate } </span>
+                           <span>Max Score: ${ maxScore } </span> 
+                           <span>Difficulty: <bean:write name="sub" property="difficutly"/></span>
                         </p>
-                        </div>   
-
-                        <a href="#" class="black-text d-flex flex-row-reverse">
-                        <button type="button" class="btn btn-outline-default waves-effect">Try Again
-                        <span><i class="fa fa-chevron-right"></i></span>
-                        </button>
-                       </a>
+                        </div>
+                       
+                          
+                        <!--set trang thai cho button try again and try now-->
+                         <logic:iterate id="st" name="practicsForm" property="statusList">
+                         	<bean:define id="id" name="st" property="userId"></bean:define>
+                         	<bean:define id="status" name="st" property="status"></bean:define>
+                         	
+                         	<logic:equal name="practicsForm" property="userId" value="${id}">
+                         		<logic:equal name="st" property="subId"  value="${subId}">
+                         			<!--giong nhau try again giong userid va subid-->
+                         			<bean:define id="flag1" value="yes"></bean:define>
+                         			 <a href="chanllenges.do?subId=${subId}&menuId=${menuId}&cateId=${cateId}" class="black-text d-flex flex-row-reverse">
+			                        <button type="button" class="btn btn-outline-default waves-effect">Try Again
+			                        <span><i class="fa fa-chevron-right"></i></span>
+			                        </button>
+			                       	</a>
+                         		</logic:equal>
+                         		                         		
+                         	</logic:equal>
+                        
+                         </logic:iterate>
+                  
+                    
+                        
                     </div>
                 </div>
                 <!--/.Card content-->
             </div>
             <!--/.Card Light-->
          </div>
+    		
+   	</logic:iterate>
+
+      
 
          <div class="row-lg-12 clearfix" style="margin-top:10px">
          <!--Card Light-->
@@ -250,8 +414,8 @@
                     <div class="row-lg-12">
                         <div class="col-lg-5">
                         <p class="card-text" style="margin-top:15px">
-                           <span>Success Rate: 97.57% </span>
-                           <span>Max Score: 1 </span> 
+                           <span>Success Rate: 97.57%  </span>
+                           <span>Max Score: 1  </span> 
                            <span>Difficulty: Easy</span>
                         </p>
                         </div>   
@@ -394,7 +558,7 @@
                       <h5 class="title">My's name team</h5>
                       <ul>
                           <li><a href="#!">Lê Hồng Phương</a></li>
-                          <li><a href="#!">Võ Thị Thu Hiền</a></li>
+                          <li><a href="#!">Võ Thị Ngọc Hiền</a></li>
                           <li><a href="#!">Nguyễn Thị Nương</a></li>
                           <li><a href="#!">Võ Văn Hòa</a></li>
                           <li><a href="#!">Nguyễn Duy Thức</a></li>

@@ -71,8 +71,8 @@
 		<ul class="nav menu">
 			<li><a href="index.html"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg>Trang chủ</a></li>
 			<li><a href="account.html"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg>Account</a></li>
-			<li class="active"><a href="category.html"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg>Category</a></li>
-			<li><a href="menu.html"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg>Menu</a></li>
+			<li ><a href="category.html"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg>Category</a></li>
+			<li class="active"><a href="menu.html"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg>Menu</a></li>
 			<li><a href="subject.html"><svg class="glyph stroked table"><use xlink:href="#stroked-table"></use></svg>Subject</a></li>
 			<li><a href="problem.html"><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg>Problem</a></li>
 			<li><a href="editorial.html"><svg class="glyph stroked star"><use xlink:href="#stroked-star"></use></svg>Editorial</a></li>
@@ -100,7 +100,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading"><a href="addmenu.jsp"><input type="submit" name="them" value="Add menu" /></a></div>
+					<div class="panel-heading"><a href="admin/menu/addmenu.jsp"><input type="submit" name="them" value="Add menu" /></a></div>
 					<div class="panel-body">
 						<table data-toggle="table" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
 						    <thead>
@@ -109,19 +109,28 @@
 						        <th data-field="name"  data-sortable="true">Name</th>
 						        <th data-field="namemn"  data-sortable="true">positive</th>
 								<th data-field="process" data-sortable="true" class="chucnang">function</th>
+								<th data-field="process1" data-sortable="true" class="chucnang">function</th>
 						    </tr>
 							
 						    </thead>
 							<tbody>
 							
-							<logic:iterate id="menu1" name="menuForm" property="menuList">
+							<logic:iterate id="menu" name="menuForm" property="menuList">
 							<tr>
 								
-								<td><bean:write name="menu1" property="name"/> </td>
-								<td><bean:write name="menu1" property="name"/> </td>
-								<td><bean:write name="menu1" property="positive"/> </td>
+								 <td><jsp:getProperty name="menu" property="menuId"/></td>
+								<td><bean:write name="menu" property="name"/> </td>
+								<td><jsp:getProperty name="menu" property="positive"/></td>
 								
-								<td class="cn"><a href="editmenu.jsp"><input type = "submit" value = "edit"/></a><a href=""><input class = "xoa" type = "submit" value = "Dele"/></a></td>
+								<bean:define id="idMenu" name="menu" property="menuId"></bean:define>
+								<td>
+								<html:link action="/prepare-update-menu.do?menuId=${idMenu}"  styleClass = "btn btn-primary">Edit</html:link>
+								</td>
+								
+								<td>
+								<html:link action="/delete-menu.do?menuId=${idMenu}"  styleClass = "btn btn-danger">Delete</html:link>
+								</td>
+								
 							</tr>
 							</logic:iterate>
 							
@@ -144,7 +153,7 @@
 	<script src="admin/js/easypiechart.js"></script>
 	<script src="admin/js/easypiechart-data.js"></script>
 	<script src="admin/js/bootstrap-datepicker.js"></script>
-	<script src="admin/js/bootstrap-table.js"></script>
+	<script src="admin/js/bootstrap-table.js"></script>]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
 	<script>
 		!function ($) {
 			$(document).on("click","ul.nav li.parent > a > span.icon", function(){		  

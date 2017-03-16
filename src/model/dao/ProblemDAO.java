@@ -36,7 +36,7 @@ public class ProblemDAO {
 				l.setInputRequire(rs.getString(5));
 				l.setOutputRequire(rs.getString(6));
 				l.setInputTestCase(rs.getString(7));
-				l.setOutputTextCase(rs.getString(8));
+				l.setOutputTestCase(rs.getString(8));
 				l.setExplain(rs.getString(9));
 				l.setInputUser(rs.getString(10));
 
@@ -60,7 +60,7 @@ public class ProblemDAO {
 			pr.setString(4, Problem.getInputRequire());
 			pr.setString(5, Problem.getOutputRequire());
 			pr.setString(6, Problem.getInputTestCase());
-			pr.setString(7, Problem.getOutputTextCase());
+			pr.setString(7, Problem.getOutputTestCase());
 			pr.setString(8, Problem.getExplain());
 			pr.setString(9, Problem.getInputUser());
 			pr.executeUpdate();
@@ -82,7 +82,7 @@ public class ProblemDAO {
 			pr.setString(4, Problem.getInputRequire());
 			pr.setString(5, Problem.getOutputRequire());
 			pr.setString(6, Problem.getInputTestCase());
-			pr.setString(7, Problem.getOutputTextCase());
+			pr.setString(7, Problem.getOutputTestCase());
 			pr.setString(8, Problem.getExplain());
 			pr.setString(9, Problem.getInputUser());
 			pr.setInt(10, Problem.getProId());

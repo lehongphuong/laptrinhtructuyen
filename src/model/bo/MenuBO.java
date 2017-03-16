@@ -1,5 +1,8 @@
 package model.bo;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.bean.Menu;
@@ -17,18 +20,27 @@ public class MenuBO {
 
 	
 	public void insertMenu(Menu Menu) {
-		insertMenu(Menu);
+		dao.insertMenu(Menu);
 
 	}
 
 	// update
 	public void updateMenu(Menu Menu) {
-		updateMenu(Menu);
+		dao.updateMenu(Menu);
 	}
 
 	// delete
 	public void deleteMenu(int menuId) {
-		deleteMenu(menuId);
+		dao.deleteMenu(menuId);
+	}
+	
+
+	/*
+	 *get all categories
+	 */
+	public Menu getOneMenuById(String menuId) {
+		return dao.getOneMenuById(menuId); 
+				
 	}
 
 }

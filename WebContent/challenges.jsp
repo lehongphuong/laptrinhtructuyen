@@ -56,12 +56,12 @@
          <nav class="navbar navbar-toggleable-md navbar-dark scrolling-navbar double-nav fixed-top">
             <!-- SideNav slide-out button -->
             <div class="float-xs-left">
-               <a href="home.html"><img style="margin-left:20px" src="img/custom/logo.png"/></a>
+               <a href="home.do"><img style="margin-left:20px" src="img/custom/logo.png"/></a>
             </div>
             <!-- Breadcrumb-->
             <div class="breadcrumb-dn mr-auto">
                <bold>
-                  <a class="nav-link" href="index.html">
+                  <a class="nav-link" href="home.do">
                      <bold><h6>CODING PROGRAM</h6></bold>
                   </a>
                </bold>
@@ -69,53 +69,75 @@
             <div class="menuHori">
             <ul class="nav navbar-nav ml-auto flex-row">
 
-               <li class="nav-item">
-                  <a class="nav-link" href="khoahoc.html"> <span class="hidden-sm-down">ARGORITHM</span></a>
-               </li>
-
-               <li class="nav-item">
-                  <a class="nav-link" href="khoahoc.html"> <span class="hidden-sm-down">STRING</span></a>
-               </li>
-
-               <li class="nav-item">
-                  <a class="nav-link" href="khoahoc.html"> <span class="hidden-sm-down">ARRAYS</span></a>
-               </li>
-
-               <li class="nav-item">
-                  <a class="nav-link" href="khoahoc.html"> <span class="hidden-sm-down">GRAPH</span></a>
-               </li>
-
-               <li class="nav-item">
-                  <a class="nav-link" href="khoahoc.html"> <span class="hidden-sm-down">GREEDY</span></a>
-               </li>
-
-               <li class="nav-item">
-                  <a class="nav-link" href="khoahoc.html"> <span class="hidden-sm-down">TREE</span></a>
-               </li>
-
-               <li class="nav-item">
-                  <a class="nav-link" href="khoahoc.html"> <span class="hidden-sm-down">DYNAMIC PROGRAM</span></a>
-               </li>
-
-               <li class="nav-item">
-                  <a class="nav-link" href="khoahoc.html"> <span class="hidden-sm-down">BIT</span></a>
-               </li>
-
-               <li class="nav-item">
-                  <a class="nav-link" href="khoahoc.html"> <span class="hidden-sm-down">RESCUTION</span></a>
-               </li>
+               
+			 <bean:define id="idMenu" name="practicsForm" property="menuId"></bean:define>
+             <bean:define id="idCate" name="practicsForm" property="cateId"></bean:define>
+             <logic:iterate name="practicsForm" property="cateList" id="cate">
+             
+             		<bean:define id="cateId1" name="cate" property="cateId"></bean:define>
+             		
+	              	<logic:equal name="cate" property="menuId" value="${idMenu}">
+	              		
+	              		<logic:equal name="practicsForm" property="cateId" value="${cateId1}">
+	              		<li class="nav-item menuActive" >
+			                 <html:link 
+	                		action="home-to-practics.do?menuId=${idMenu}&cateId=${cateId1}">
+	                		 <span class="hidden-sm-down uppercase"  ><bean:write name="cate" property="name"/></span>
+	                		</html:link>
+		               </li>
+	              		</logic:equal>
+	              		
+	              		<logic:notEqual name="practicsForm" property="cateId" value="${cateId1 }">
+	              		<li class="nav-item" >
+			                 <html:link  
+	                		action="home-to-practics.do?menuId=${idMenu}&cateId=${cateId1}">
+	                		 <span class="hidden-sm-down uppercase"  ><bean:write name="cate" property="name"/></span>
+	                		</html:link>
+		               </li>
+	              		</logic:notEqual>
+                		
+                	</logic:equal>
+            	</logic:iterate>
 
 
-               <li class="nav-item dropdown">
+               <logic:equal name="practicsForm" property="statusLogin" value="notLogin">
+              	<li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fa fa-user"></i> <span class="hidden-sm-down">ACCOUNT</span>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                     <a class="dropdown-item" href="#">LOGIN</a>
-                     <a class="dropdown-item" href="#">REGISTER</a>
+                     <a class="dropdown-item"  data-toggle="modal" data-target="#modal-login">LOGIN</a>
+                     <a class="dropdown-item" data-toggle="modal" data-target="#modal-register">REGISTER</a>
                   </div>
                </li>
-               </ul>
+              </logic:equal>
+              
+               <logic:equal name="practicsForm" property="statusLogin" value="login">
+              	<li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-user"></i> <span class="hidden-sm-down">
+                  <span class="uppercase"> WELCOME <bean:write name="practicsForm" property="username"/> </span>
+						
+				</span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                  	<html:link action="/user-logout.do" styleClass="dropdown-item">LOGOUT</html:link>
+                  </div>
+               </li>
+              </logic:equal>  
+              
+              <logic:equal name="practicsForm" property="statusLogin" value="fail">
+               <!-- Modal Login -->
+              	<li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-user"></i> <span class="hidden-sm-down">LOGIN FAIL PLEASE AGAIN</span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                     <a class="dropdown-item"  data-toggle="modal" data-target="#modal-login">LOGIN</a>
+                     <a class="dropdown-item" data-toggle="modal" data-target="#modal-register">LOGOUT</a>
+                  </div>
+               </li>
+              </logic:equal>
 
             </div>
          </nav>
@@ -126,8 +148,10 @@
          
       <div class="container" style="margin-top:100px">
 
-      <div style="float:right;  font-size:20px; margin-bottom:25px" class="row-lg-12">
-         <button type="button" class="btn btn-outline-warning waves-effect">Points: 2401.27 Rank: 3838</button>
+     <div style="float:right;  font-size:20px; margin-bottom:25px" class="row-lg-12">
+         <button type="button" class="btn btn-outline-warning waves-effect">
+         Points: <bean:write name="practicsForm" property="point"/>
+         Rank: <bean:write name="practicsForm" property="rank"/> </button>
          
          <hr>
       </div>
@@ -135,12 +159,12 @@
 
 <!-- main  -->
       <div class="row-lg-12 clearfix" style="margin-top:10px">
-      <h1 style="color:#00C851;">Solve Me First <span><i class="fa fa-bookmark" aria-hidden="true"></i></span></h1>
+      <h1 style="color:#00C851;">Solve Me First<span><i class="fa fa-bookmark" aria-hidden="true"></i></span></h1>
       <br>
 
 
       <!-- Nav tabs -->
-<div class="tabs-wrapper tabs-5"> 
+	<div class="tabs-wrapper tabs-5"> 
     <ul class="nav classic-tabs tabs-grey" role="tablist" style="background-color:#33b5e5">
         <li class="nav-item">
             <a class="nav-link waves-light active" data-toggle="tab" href="#panel83" role="tab"><i class="fa fa-code fa-2x" aria-hidden="true"></i><br> Problem</a>
@@ -155,7 +179,7 @@
             <a class="nav-link waves-light" data-toggle="tab" href="#panel86" role="tab"><i class="fa fa-edit fa-2x" aria-hidden="true"></i><br> Editorial</a>
         </li>
     </ul>
-</div>
+	</div>
 
 <!-- Tab panels -->
 <div class="tab-content card">
@@ -219,7 +243,9 @@
 
 </div>
 
-      </div>
+	</div>
+
+</div>
 <!-- end main -->
 
 
@@ -246,7 +272,7 @@
                       <h5 class="title">My's name team</h5>
                       <ul>
                           <li><a href="#!">Lê Hồng Phương</a></li>
-                          <li><a href="#!">Võ Thị Thu Hiền</a></li>
+                          <li><a href="#!">Võ Thị Ngọc Hiền</a></li>
                           <li><a href="#!">Nguyễn Thị Nương</a></li>
                           <li><a href="#!">Võ Văn Hòa</a></li>
                           <li><a href="#!">Nguyễn Duy Thức</a></li>

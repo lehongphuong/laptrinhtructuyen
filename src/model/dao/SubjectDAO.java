@@ -47,6 +47,36 @@ public class SubjectDAO {
 	}
 
 	
+	/*
+	 *get all subject by cate id
+	 */
+	public ArrayList<Subject> getAllSubjectByCateId(String cateId) {
+		ArrayList<Subject> list = new ArrayList<>();
+		String sql = "select * from Subject where cateId='"+cateId+"' ";
+		try {
+			
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+				Subject l = new Subject();
+				l.setSubId(rs.getInt(1));
+				l.setCateId(rs.getInt(2));
+				l.setTitle(rs.getString(3));
+				l.setSuccessRate(rs.getFloat(4));
+				l.setMaxScore(rs.getInt(5));
+				l.setDifficutly(rs.getString(6));
+				
+				list.add(l);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
+	
 	public void insertSubject(Subject Subject) {
 		String sql = "insert into Subject values(?,?,?,?,?)";
 		try {

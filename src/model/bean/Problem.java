@@ -8,7 +8,7 @@ public class Problem {
 	private String inputRequire;
 	private String outputRequire;
 	private String inputTestCase;
-	private String outputTextCase;
+	private String outputTestCase;
 	private String explain;
 	private String inputUser;
 
@@ -18,7 +18,7 @@ public class Problem {
 
 	public Problem(int proId, int subId, String description, String constrain,
 			String inputRequire, String outputRequire, String inputTestCase,
-			String outputTextCase, String explain, String inputUser) {
+			String outputTestCase, String explain, String inputUser) {
 		super();
 		this.proId = proId;
 		this.subId = subId;
@@ -27,7 +27,7 @@ public class Problem {
 		this.inputRequire = inputRequire;
 		this.outputRequire = outputRequire;
 		this.inputTestCase = inputTestCase;
-		this.outputTextCase = outputTextCase;
+		this.outputTestCase = outputTestCase;
 		this.explain = explain;
 		this.inputUser = inputUser;
 	}
@@ -88,12 +88,12 @@ public class Problem {
 		this.inputTestCase = inputTestCase;
 	}
 
-	public String getOutputTextCase() {
-		return outputTextCase;
+	public String getOutputTestCase() {
+		return outputTestCase;
 	}
 
-	public void setOutputTextCase(String outputTextCase) {
-		this.outputTextCase = outputTextCase;
+	public void setOutputTestCase(String outputTestCase) {
+		this.outputTestCase = outputTestCase;
 	}
 
 	public String getExplain() {

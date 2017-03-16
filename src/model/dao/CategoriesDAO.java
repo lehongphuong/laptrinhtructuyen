@@ -45,6 +45,8 @@ public class CategoriesDAO {
 		return list;
 	}
 
+	 
+
 	
 	public void insertCategories(Categories categories) {
 		String sql = "insert into Categories values(?,?)";

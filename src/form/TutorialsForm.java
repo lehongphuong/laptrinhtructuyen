@@ -1,5 +1,9 @@
 package form;
 
-public class TutorialsForm {
+import org.apache.struts.action.ActionForm;
+
+public class TutorialsForm extends ActionForm{
+	
+	
 
 }

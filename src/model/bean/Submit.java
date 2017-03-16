@@ -4,19 +4,19 @@ public class Submit {
 	private int submitId;
 	private int subId;
 	private int userId;
-	private String date;
+	private String time;
 	private float point;
 
 	public Submit() {
 		super();
 	}
 
-	public Submit(int submitId, int subId, int userId, String date, float point) {
+	public Submit(int submitId, int subId, int userId, String time, float point) {
 		super();
 		this.submitId = submitId;
 		this.subId = subId;
 		this.userId = userId;
-		this.date = date;
+		this.time = time;
 		this.point = point;
 	}
 
@@ -44,12 +44,12 @@ public class Submit {
 		this.userId = userId;
 	}
 
-	public String getDate() {
-		return date;
+	public String getTime() {
+		return time;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public void setTime(String time) {
+		this.time = time;
 	}
 
 	public float getPoint() {

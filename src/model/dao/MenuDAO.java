@@ -31,7 +31,7 @@ public class MenuDAO {
 				Menu l = new Menu();
 				l.setMenuId(rs.getInt(1));
 				l.setName(rs.getString(2));
-				l.setPositive(rs.getString(3));
+				l.setPositive(rs.getInt(3));
 				
 				list.add(l);
 			}
@@ -42,6 +42,28 @@ public class MenuDAO {
 
 		return list;
 	}
+	
+	/*
+	 *get all categories
+	 */
+	public Menu getOneMenuById(String menuId) {
+		Menu l = new Menu();
+		String sql = "select * from menu where menuId='"+menuId+"'  ";
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+				l.setMenuId(rs.getInt(1));
+				l.setName(rs.getString(2));
+				l.setPositive(rs.getInt(3));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return l;
+	}
 
 	
 	public void insertMenu(Menu Menu) {
@@ -49,7 +71,7 @@ public class MenuDAO {
 		try {
 			PreparedStatement pr = con.prepareStatement(sql);
 			pr.setString(1, Menu.getName());
-			pr.setString(2, Menu.getPositive());
+			pr.setInt(2, Menu.getPositive());
 
 			pr.executeUpdate();
 		} catch (SQLException e) {
@@ -66,7 +88,7 @@ public class MenuDAO {
 			PreparedStatement pr = con.prepareStatement(sql);
 			
 			pr.setString(1, Menu.getName());
-			pr.setString(2, Menu.getPositive());
+			pr.setInt(2, Menu.getPositive());
 			pr.setInt(3, Menu.getMenuId());
 			 
 			pr.executeUpdate();

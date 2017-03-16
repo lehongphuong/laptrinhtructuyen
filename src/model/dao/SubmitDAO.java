@@ -33,7 +33,7 @@ public class SubmitDAO
 				l.setSubmitId(rs.getInt(1));
 				l.setSubId(rs.getInt(2)); 
 				l.setUserId(rs.getInt(3));
-				l.setDate(rs.getString(4));
+				l.setTime(rs.getString(4));
 				l.setPoint(rs.getFloat(5));
 				
 				list.add(l);
@@ -53,7 +53,7 @@ public class SubmitDAO
 			PreparedStatement pr = con.prepareStatement(sql);
 			pr.setInt(1, submit.getSubId());
 			pr.setInt(2, submit.getUserId());
-			pr.setString(3, submit.getDate());
+			pr.setString(3, submit.getTime());
 			pr.setFloat(4, submit.getPoint());
  
 			pr.executeUpdate(); 
@@ -72,7 +72,7 @@ public class SubmitDAO
 			
 			pr.setInt(1, submit.getSubId());
 			pr.setInt(2, submit.getUserId());
-			pr.setString(3, submit.getDate());
+			pr.setString(3, submit.getTime());
 			pr.setFloat(4, submit.getPoint());
 			pr.setInt(5, submit.getSubmitId());
 			 
