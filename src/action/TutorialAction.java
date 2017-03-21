@@ -74,12 +74,23 @@ public class TutorialAction extends Action {
 		// set list categories
 		tf.setCateList(categoriesBO.getAllCategories());
 		// set list tutorial
-		TutorialBO tutorialBO=new TutorialBO();
+		TutorialBO tutorialBO = new TutorialBO();
 		tf.setTutList(tutorialBO.getAllTutorialByCateId(cateId));
-		//get list tutorial code
-		TutorialCodeBO tutorialCodeBO=new TutorialCodeBO();
+		// get list tutorial code
+		TutorialCodeBO tutorialCodeBO = new TutorialCodeBO();
 		tf.setTutCodeList(tutorialCodeBO.getAllTutorialCodeByTutId(tutId));
-		 
+
+		// tao bien editor mirror code edittor
+		myCookie.setCookie("editor", "html");
+		if ("7".equals(cateId)) {
+			myCookie.setCookie("editor", "c++");
+		}
+		if ("8".equals(cateId)) {
+			myCookie.setCookie("editor", "python");
+		}
+		if ("9".equals(cateId)) {
+			myCookie.setCookie("editor", "java");
+		}
 
 		return mapping.findForward("thanhCong");
 	}

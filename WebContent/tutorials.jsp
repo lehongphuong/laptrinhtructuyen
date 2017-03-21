@@ -205,6 +205,8 @@
     </div>
     <!-- End Ezoic - Leaderboard - top_of_page -->
     <h1>HTML  Elements </h1>
+    asdf ${cookie.editor}
+    
     <div class="w3-clear nextprev">
       <a class="btn btn-outline-primary waves-effect"
       href="home-to-practics.do?menuId=${param.menuId}&cateId=${param.cateId}&tutId=${param.tutId>1?param.tutId-1:param.tutId}">❮ Previous</a>
