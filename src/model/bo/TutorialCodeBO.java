@@ -20,6 +20,20 @@ public class TutorialCodeBO {
 
 	}
 
+	/*
+	 * get all TutorialCode by tut ID
+	 */
+	public ArrayList<TutorialCode> getAllTutorialCodeByTutId(String tutId) {
+		return dao.getAllTutorialCodeByTutId(tutId);
+	}
+	
+	/*
+	 * get one TutorialCode by tut ID
+	 */
+	public TutorialCode getOneTutCodeById(String tutCodeId) {
+		return dao.getOneTutCodeById(tutCodeId);
+	}
+
 	public void insertTutorialCode(TutorialCode tutorialCode) {
 		dao.insertTutorialCode(tutorialCode);
 

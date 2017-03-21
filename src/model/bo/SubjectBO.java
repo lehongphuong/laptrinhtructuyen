@@ -26,17 +26,17 @@ public class SubjectBO {
 	}
 
 	public void insertSubject(Subject Subject) {
-		insertSubject(Subject);
+		dao.insertSubject(Subject);
 
 	}
 
 	// update
 	public void updateSubject(Subject Subject) {
-		updateSubject(Subject);
+		dao.updateSubject(Subject);
 	}
 
 	// delete
 	public void deleteSubject(int subId) {
-		deleteSubject(subId);
+		dao.deleteSubject(subId);
 	}
 }

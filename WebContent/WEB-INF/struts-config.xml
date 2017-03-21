@@ -8,6 +8,10 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 		<form-bean name="menuForm" type="form.menu.MenuForm" />
 
 		<form-bean name="practicsForm" type="form.PracticsForm" />
+		
+		<form-bean name="challengesForm" type="form.ChallengesForm" />
+		
+		<form-bean name="tutorialForm" type="form.TutorialsForm" />
 
 	</form-beans>
 
@@ -37,7 +41,7 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 		<action input="/home.jsp" name="practicsForm" path="/home-to-practics"
 			type="action.HomeToPracticsAction" scope="request">
 			<forward name="practics" path="/list-practics.do" />
-			<forward name="tutorials" path="/tutorials.jsp" />
+			<forward name="tutorials" path="/list-tutorial.do" />
 		</action>
 
 		<action input="/home.jsp" name="practicsForm" path="/list-practics"
@@ -45,6 +49,22 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 			<forward name="thanhCong" path="/practics.jsp" />
 		</action>
 <!--end practics -->
+
+<!--tutorial -->
+		<action input="/home.jsp" name="tutorialForm" path="/list-tutorial"
+			type="action.TutorialAction" scope="request">
+		<forward name="thanhCong" path="/tutorials.jsp" />
+		</action>
+<!--end tutorial -->
+
+<!--run code html -->
+		<action input="/tutorials.jsp" name="tutorialForm" path="/run-html"
+			type="action.RunHtmlAction" scope="request">
+		<forward name="thanhCong" path="/runhtml.jsp" />
+		</action>
+<!--/end run code html -->
+
+
 
 <!--problem -->
 		<action input="/challenges.jsp" name="practicsForm" path="/problem"
@@ -55,8 +75,18 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 <!--end problem -->
 
 <!--challenger -->
-		<action input="/challenges.jsp" name="practicsForm" path="/chanllenges"
-			type="action.ProblemAction" scope="request">
+		<action input="/challenges.jsp" name="challengesForm" path="/chanllenges"
+			type="action.ChallengesAction" scope="request">
+			<forward name="thanhCong" path="/challenges.jsp" />
+		</action>
+		
+		<action input="/challenges.jsp" name="challengesForm" path="/run-code"
+			type="action.ChallengesAction" scope="request">
+			<forward name="thanhCong" path="/challenges.jsp" />
+		</action>
+		
+		<action input="/challenges.jsp" name="challengesForm" path="/submit-code"
+			type="action.ChallengesAction" scope="request">
 			<forward name="thanhCong" path="/challenges.jsp" />
 		</action>
 <!--end challenger -->

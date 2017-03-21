@@ -16,16 +16,16 @@ public ArrayList<Status> getAllStatus() {
 
 
 public void insertStatus(Status Status) {
-	insertStatus(Status);
+	dao.insertStatus(Status);
 }
 
 // update
 public void updateStatus(Status Status) {
-	updateStatus(Status);
+	dao.updateStatus(Status);
 }
 
 // delete
 public void deleteStatus(int statusId) {
-	deleteStatus(statusId);
+	dao.deleteStatus(statusId);
 }
 }

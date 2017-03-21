@@ -45,6 +45,35 @@ public class SubmitDAO
 
 		return list;
 	}
+	
+
+	/*
+	 *get all sumit by user id and subject id
+	 */
+	public ArrayList<Submit> getAllSubmitOfUserWithSubId(String userId, String subId) {
+		ArrayList<Submit> list = new ArrayList<>();
+		String sql = "select * from Submit where userId="+userId+" and subId= "+subId;
+		try {
+			
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+				Submit l = new Submit();
+				l.setSubmitId(rs.getInt(1));
+				l.setSubId(rs.getInt(2)); 
+				l.setUserId(rs.getInt(3));
+				l.setTime(rs.getString(4));
+				l.setPoint(rs.getFloat(5));
+				
+				list.add(l);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return list;
+	}
 
 	
 	public void insertSubmit(Submit submit) {

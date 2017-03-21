@@ -6,18 +6,29 @@ public class Submit {
 	private int userId;
 	private String time;
 	private float point;
+	private String code;
 
 	public Submit() {
 		super();
 	}
 
-	public Submit(int submitId, int subId, int userId, String time, float point) {
+	public Submit(int submitId, int subId, int userId, String time,
+			float point, String code) {
 		super();
 		this.submitId = submitId;
 		this.subId = subId;
 		this.userId = userId;
 		this.time = time;
 		this.point = point;
+		this.code = code;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public int getSubmitId() {

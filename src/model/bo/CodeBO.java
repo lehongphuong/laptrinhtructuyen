@@ -22,11 +22,11 @@ public class CodeBO {
 
 	// update
 	public void updateCode(Code Code) {
-		updateCode(Code);
+		dao.updateCode(Code);
 	}
 
 	// delete
 	public void deleteCode(int codeId) {
-		deleteCode(codeId);
+		dao.deleteCode(codeId);
 	}
 }

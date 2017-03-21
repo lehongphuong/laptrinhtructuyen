@@ -46,6 +46,34 @@ public class TutorialDAO
 
 		return list;
 	}
+	
+	/*
+	 *get all Tutorial by cate id
+	 */
+	public ArrayList<Tutorial> getAllTutorialByCateId(String cateId) {
+		ArrayList<Tutorial> list = new ArrayList<>();
+		String sql = "select * from Tutorial where cateId="+cateId;
+		try {
+			
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+				Tutorial l = new Tutorial();
+				l.setTuId(rs.getInt(1));
+				l.setSubId(rs.getInt(2));
+				l.setTitle(rs.getString(3));
+				l.setPositive(rs.getInt(4));
+				l.setActive(rs.getBoolean(5));
+				
+				list.add(l);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return list;
+	}
 
 	
 	public void insertTutorial(Tutorial tutorial) {

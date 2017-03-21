@@ -5,18 +5,26 @@ public class LeaderBoard {
 	private int leadId;
 	private int subId;
 	private int userId;
-	private int codeId;
+	private int submitId;
 
 	public LeaderBoard() {
 		super();
 	}
 
-	public LeaderBoard(int leadId, int subId, int userId, int codeId) {
+	public LeaderBoard(int leadId, int subId, int userId, int submitId) {
 		super();
 		this.leadId = leadId;
 		this.subId = subId;
 		this.userId = userId;
-		this.codeId = codeId;
+		this.submitId = submitId;
+	}
+
+	public int getSubmitId() {
+		return submitId;
+	}
+
+	public void setSubmitId(int submitId) {
+		this.submitId = submitId;
 	}
 
 	public int getLeadId() {
@@ -43,12 +51,5 @@ public class LeaderBoard {
 		this.userId = userId;
 	}
 
-	public int getCodeId() {
-		return codeId;
-	}
-
-	public void setCodeId(int codeId) {
-		this.codeId = codeId;
-	}
-
+ 
 }

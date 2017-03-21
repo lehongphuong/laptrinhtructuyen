@@ -3,6 +3,7 @@ package model.bean;
 public class TutorialCode {
 	private int tuCoId;
 	private int tuId;
+	private String title;
 	private String description;
 	private String code;
 	private int positive;
@@ -11,14 +12,23 @@ public class TutorialCode {
 		super();
 	}
 
-	public TutorialCode(int tuCoId, int tuId, String description, String code,
-			int positive) {
+	TutorialCode(int tuCoId, int tuId, String title, String description,
+			String code, int positive) {
 		super();
 		this.tuCoId = tuCoId;
 		this.tuId = tuId;
+		this.title = title;
 		this.description = description;
 		this.code = code;
 		this.positive = positive;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public int getTuCoId() {

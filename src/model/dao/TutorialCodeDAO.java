@@ -31,9 +31,10 @@ public class TutorialCodeDAO {
 				TutorialCode l = new TutorialCode();
 				l.setTuCoId(rs.getInt(1));
 				l.setTuId(rs.getInt(2));
-				l.setDescription(rs.getString(3));
-				l.setCode(rs.getString(4));
-				l.setPositive(rs.getInt(5));
+				l.setTitle(rs.getString(3));
+				l.setDescription(rs.getString(4));
+				l.setCode(rs.getString(5));
+				l.setPositive(rs.getInt(6));
 
 				list.add(l);
 			}
@@ -43,6 +44,63 @@ public class TutorialCodeDAO {
 		}
 
 		return list;
+	}
+
+	/*
+	 * get all TutorialCode by tut ID
+	 */
+	public ArrayList<TutorialCode> getAllTutorialCodeByTutId(String tutId) {
+		ArrayList<TutorialCode> list = new ArrayList<>();
+		String sql = "select * from TutorialCode where tuId=" + tutId;
+		try {
+
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+				TutorialCode l = new TutorialCode();
+				l.setTuCoId(rs.getInt(1));
+				l.setTuId(rs.getInt(2));
+				l.setTitle(rs.getString(3));
+				l.setDescription(rs.getString(4));
+				l.setCode(rs.getString(5));
+				l.setPositive(rs.getInt(6));
+
+				list.add(l);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
+	/*
+	 * get one TutorialCode by tut ID
+	 */
+	public TutorialCode getOneTutCodeById(String tutCodeId) {
+		TutorialCode l = new TutorialCode();
+		String sql = "select * from TutorialCode where tuCoId=" + tutCodeId;
+		try {
+				
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+
+				l.setTuCoId(rs.getInt(1));
+				l.setTuId(rs.getInt(2));
+				l.setTitle(rs.getString(3));
+				l.setDescription(rs.getString(4));
+				l.setCode(rs.getString(5).trim());
+				l.setPositive(rs.getInt(6));
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return l;
 	}
 
 	public void insertTutorialCode(TutorialCode tutorialCode) {

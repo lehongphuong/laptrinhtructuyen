@@ -49,6 +49,39 @@ public class ProblemDAO {
 
 		return list;
 	}
+	
+	/*
+	 * get problem by subid
+	 */
+	public Problem getProblemBySubId(String subId) {
+		Problem l = new Problem();
+		String sql = "select * from Problem where subId="+subId;
+		try {
+
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+				
+				l.setProId(rs.getInt(1));
+				l.setSubId(rs.getInt(2));
+				l.setDescription(rs.getString(3));
+				l.setConstrain(rs.getString(4));
+				l.setInputRequire(rs.getString(5));
+				l.setOutputRequire(rs.getString(6));
+				l.setInputTestCase(rs.getString(7));
+				l.setOutputTestCase(rs.getString(8));
+				l.setExplain(rs.getString(9));
+				l.setInputUser(rs.getString(10));
+
+			 
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return l;
+	}
 
 	public void insertProblem(Problem Problem) {
 		String sql = "insert into Problem values(?,?,?,?,?,?,?,?,?)";

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import model.bean.Categories;
 import model.bean.Editorial;
 import model.bean.LeaderBoard;
+import model.bean.Problem;
 import model.bean.Status;
 import model.bean.Subject;
 import model.bean.Submit;
@@ -42,13 +43,24 @@ public class ChallengesForm extends ActionForm {
 	private String outputTestCase;
 	private String explain;
 	private String inputUser;
-	
+
+	// problem
+	private Problem problem;
+
 	// submit
 	private ArrayList<Submit> submitList;
 	// leaderbord
 	private ArrayList<LeaderBoard> leaderList;
 	// editorial
 	private Editorial editorial;
+
+	public Problem getProblem() {
+		return problem;
+	}
+
+	public void setProblem(Problem problem) {
+		this.problem = problem;
+	}
 
 	public String getCateId() {
 		return cateId;
