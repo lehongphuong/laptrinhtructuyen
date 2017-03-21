@@ -161,7 +161,7 @@
   <!-- Sidebar navigation -->
   <div id="leftmenuinner">
     <div id="leftmenuinnerinner">
-      <ul class="menuVertical">
+      <ul class="menuVertical"> 
         
        
         <logic:iterate name="tutorialForm" property="tutList" id="tut">
