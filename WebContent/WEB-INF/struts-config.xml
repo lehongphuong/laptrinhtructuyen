@@ -42,7 +42,7 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 			type="action.HomeToPracticsAction" scope="request">
 			<forward name="practics" path="/list-practics.do" />
 			<forward name="tutorials" path="/list-tutorial.do" />
-		</action>
+		</action> 
 
 		<action input="/home.jsp" name="practicsForm" path="/list-practics"
 			type="action.PracticsAction" scope="request">
