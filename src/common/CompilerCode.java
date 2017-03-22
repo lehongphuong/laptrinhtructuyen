@@ -8,7 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-import form.menu.Response;
+import model.bean.Response;
 
 public class CompilerCode {
 

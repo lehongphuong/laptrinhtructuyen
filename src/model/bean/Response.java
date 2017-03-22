@@ -1,4 +1,4 @@
-package form.menu;
+package model.bean;
 
 import org.json.JSONException;
 import org.json.JSONObject;
