@@ -180,6 +180,7 @@
                                         <li class="nav-item">
                                             <a class="nav-link waves-light active" data-toggle="tab" href="#panel83" role="tab"><i class="fa fa-code fa-2x" aria-hidden="true"></i><br> Problem</a>
                                         </li>
+                                        
                                         <li class="nav-item">
                                             <a class="nav-link waves-light" data-toggle="tab" href="#panel84" role="tab"><i class="fa fa-upload fa-2x" aria-hidden="true"></i><br> Submissions</a>
                                         </li>
@@ -470,11 +471,33 @@ $(document).ready(function() {
        <!--/.problem 1-->
 
        <!--submittion 2-->
+       								
+       			
+       
                                 <div class="tab-pane fade" id="panel84" role="tabpanel">
-                                    <logic:iterate name="challengesForm" property="submitList" id="submit">
-										<bean:write name="submit" property="time"/>
-										<jsp:getProperty name="submit" property="point"/>
-									</logic:iterate>
+									<table class="table">
+									    <thead>
+									      <tr>
+									        <th>Date submit</th>
+									        <th>Point</th>
+									      </tr>
+									    </thead>
+									    <tbody>
+									     <logic:iterate name="challengesForm" property="submitList" id="submit">
+									     <tr>
+									        <td><a href="#"  >
+									        <bean:write name="submit" property="time"/>
+									        </a></td>
+									        <td><a href="#" >
+									        <jsp:getProperty name="submit" property="point"/>
+									        </a></td>
+									      </tr>
+										</logic:iterate> 
+									     
+									      
+									       
+									    </tbody>
+									  </table>
 
                                 </div>
        <!--/.submition 2-->

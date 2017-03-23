@@ -34,84 +34,25 @@
 	color: white;
 }
 
-.menuVertical
- 
-li
- 
-a
-:hover
-:not
- 
-(
-.active
- 
-)
-{
-background-color
-:
- 
-#555
-;
-
-	
-color
-:
- 
-white
-;
-
-
+.menuVertical li a :hover :not (.active) {
+background-color :#555;
+	color: white;
 }
-.menuHori
- 
-li
- 
-a
-:hover
-:not
- 
-(
-.active
- 
-)
-{
-background-color
-:
- 
-#80ced6
-;
 
-	
-color
-:
- 
-white
-;
-
-	
-font-size
-:
- 
-20
-px
-;
-
-	
-margin
-:
- 
-10
-dp
-;
-
-
+.menuHori li a :hover :not (.active ) {
+	background-color: #80ced6;
+	color: white;
+	font-size: 20 px;
+	margin: 10 dp;
 }
+
 .menuActive {
 	background-color: #80ced6;
 	color: white;
 	font-size: 20px;
 	margin: 10dp;
 }
+
 
 .menuHori li a {
 	font-family: "Times New Roman", Times, serif;
@@ -206,8 +147,9 @@ w3.css: 230 .w3-example {
 
 .select-language {
 	text-align: right;
-	float: right; margin-top : 10px;
-	/* background: #ff4444; */
+	float: right;
+	margin-top: 10px;
+	background: #ff4444;
 	color: #ffffff;
 	font-family: "Times New Roman", Times, serif;
 	font-size: 20px;
