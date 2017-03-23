@@ -60,7 +60,12 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 <!--run code html -->
 		<action input="/tutorials.jsp" name="tutorialForm" path="/run-html"
 			type="action.RunHtmlAction" scope="request">
-		<forward name="thanhCong" path="/runhtml.jsp" />
+			<forward name="thanhCong" path="/runhtml.jsp" />
+		</action>
+		
+		<action input="/tutorials.jsp" name="tutorialForm" path="/run-code-tutorial"
+			type="action.RunCodeAction" scope="request">
+			<forward name="thanhCong" path="/list-tutorial.do" />
 		</action>
 <!--/end run code html -->
 
@@ -81,8 +86,8 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 		</action>
 		
 		<action input="/challenges.jsp" name="challengesForm" path="/run-code"
-			type="action.ChallengesAction" scope="request">
-			<forward name="thanhCong" path="/challenges.jsp" />
+			type="action.RunCodeAction" scope="request">
+			<forward name="thanhCong" path="/chanllenges.do" />
 		</action>
 		
 		<action input="/challenges.jsp" name="challengesForm" path="/submit-code"

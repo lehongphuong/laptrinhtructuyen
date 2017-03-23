@@ -23,6 +23,7 @@
 
                         <!-- <link rel="stylesheet" href="css/font-awesome.min.css"> -->
                         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+                       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
                         <!-- CSS -->
                         <link href="css/compiled.min.css" rel="stylesheet">
@@ -34,17 +35,26 @@
                         <!-- Your custom styles (optional) -->
                         <link href="css/style.css" rel="stylesheet">
 
-                        <!-- miror coded -->
-                        <link rel=stylesheet href="lib/codemirror.css">
-                        <link rel=stylesheet href="doc/docs.css">
-                        <script src="lib/codemirror.js"></script>
-                        <script src="mode/xml/xml.js"></script>
-                        <script src="mode/javascript/javascript.js"></script>
-                        <script src="mode/css/css.js"></script>
-                        <script src="mode/htmlmixed/htmlmixed.js"></script>
-                        <script src="addon/edit/matchbrackets.js"></script>
-
-                        <script src="doc/activebookmark.js"></script>
+                       <!-- mirror editor-->
+					   <link rel="stylesheet" href="library/codemirror.css">
+					   <script src="library/codemirror.js"></script>
+					   <script src="library/selection-pointer.js"></script>
+					   <script src="library/xml.js"></script>
+					   <script src="library/javascript.js"></script>
+					   <script src="library/css.js"></script>
+					   <script src="library/vbscript.js"></script>
+					   <script src="library/htmlmixed.js"></script>
+					   <script src="library/markdown.js"></script>
+					   <script src="library/show-hint.js"></script>
+					   <script src="library/javascript-hint.js"></script>
+					   <link rel=stylesheet href="library/docs.css">
+					   <script src="library/matchbrackets.js"></script>
+					   <link rel="stylesheet" href="library/show-hint.css">
+					   <script src="library/clike.js"></script>
+					   <script src="library/python.js"></script>
+					   
+					   <style>.CodeMirror {border: 25px inset #dee;}</style>
+					   <!-- /mirror editor-->
 
                     </head>
 
@@ -234,9 +244,139 @@
                                         <div class="section-title">Explain</div>
                                         <p><bean:write name="prob" property="explain"/></p>
                                     </div>
+                                    
+                                    
 <!-- form run code -->
+ 
+<div class="col-lg-3 select-language">
+ <label for="sel1">SELECT LANGUAGE:</label>
+ <html:select name="challengesForm" styleClass="form-control" property="editor" styleId="sel1">
+   <html:option value="C++">C++</html:option>
+   <html:option value="JAVA">JAVA</html:option>
+   <html:option value="PYTHON">PYTHON</html:option>
+ </html:select>
 
-									<html:form   action="/run-code.do" >
+</div>
+
+<html:form action="/chanllenges.do?subId=${param.subId}&menuId=${param.menuId}&cateId=${param.cateId}&editor=c++" styleId="c++">
+
+</html:form>
+
+<html:form action="/chanllenges.do?subId=${param.subId}&menuId=${param.menuId}&cateId=${param.cateId}&editor=java" styleId="java">
+
+</html:form>
+
+<html:form action="/chanllenges.do?subId=${param.subId}&menuId=${param.menuId}&cateId=${param.cateId}&editor=python" styleId="python">
+
+</html:form>
+
+<script type="text/javascript">
+
+//Material Select Initialization
+$(document).ready(function() {
+	$( "#sel1" ).change(function() {
+			var action=$("#sel1").val();
+			if(action=="C++"){
+				document.getElementById("c++").submit();
+		  	}
+			if(action=="JAVA"){
+				document.getElementById("java").submit();
+		  	}
+			if(action=="PYTHON"){
+				document.getElementById("python").submit();
+		  	}
+		});
+ });
+
+</script>
+ 
+<br><br>
+
+
+<html:form   action="/chanllenges.do?subId=${param.subId}&menuId=${param.menuId}&cateId=${param.cateId}&editor=${param.editor}&run=true" >
+ 
+<!-- c++ -->
+     	
+     	<logic:equal name="challengesForm" property="editor" value="C++">
+     	<h4><span class="label label-info">C++ EDITOR</span></h4><br>
+     	
+	   <html:textarea name="challengesForm" property="codeSample"  styleId="code-c++">
+ 
+	   </html:textarea>
+	
+	    <script type="text/javascript">
+	     var editor = CodeMirror.fromTextArea(document.getElementById("code-c++"), {
+	    	 lineNumbers: true,
+	         matchBrackets: true,
+	         mode: "text/x-c++src"
+	     });
+	   </script>
+	 
+	   
+     	<br><br><br>
+     	</logic:equal>
+     	
+<!-- end c++ -->
+     	
+<!-- python -->
+
+		<logic:equal name="challengesForm" property="editor" value="PYTHON">
+     	<h4><span class="label label-info">PYTHON EDITOR</span></h4><br>
+    <html:textarea name="challengesForm" property="codeSample"   styleId="code-python">
+ 
+	   </html:textarea>
+	
+	    <script type="text/javascript">
+	     var editor = CodeMirror.fromTextArea(document.getElementById("code-python"), {
+	    	 mode: {name: "python",
+	   	      version: 3,
+	   	      singleLineStringErrors: false},
+	   	      lineNumbers: true,
+	   	      indentUnit: 4,
+	   	      matchBrackets: true
+	     });
+	   </script>
+	   		 
+	   
+	   
+     	<br><br><br>
+     	</logic:equal>
+     	
+<!-- end python -->
+     	
+<!-- java --> 
+     	
+     	<logic:equal name="challengesForm" property="editor" value="JAVA">
+     	<h4><span class="label label-info">JAVA EDITOR</span></h4><br>
+   
+	   <html:textarea name="challengesForm" property="codeSample"  styleId="code-java">
+ 
+	   </html:textarea>
+	
+	    <script type="text/javascript">
+	     var editor = CodeMirror.fromTextArea(document.getElementById("code-java"), {
+	    	 lineNumbers: true,
+	         matchBrackets: true,
+	         mode: "text/x-java"
+	     });
+	   </script>
+	   		 
+	   	 
+	   
+	   
+     	<br><br><br>
+     	</logic:equal>
+     	
+<!-- end java --> 
+				
+				
+				
+<script> 
+  var mac = CodeMirror.keyMap.default == CodeMirror.keyMap.macDefault;
+  CodeMirror.keyMap.default[(mac ? "Cmd" : "Ctrl") + "-Space"] = "autocomplete";
+</script>
+									
+									
 									
            <!-- buttton -->
 
@@ -259,10 +399,10 @@
 
                                         </div>
                                         <div class="p-2">
-                                            <button type="button" class="btn btn-outline-default waves-effect">Run code</button>
+                                            <html:submit  property="submit" value="runCode" styleClass="btn btn-outline-default waves-effect">Run code</html:submit>
                                         </div>
                                         <div class="p-2">
-                                            <button type="button" class="btn btn-success waves-effect">Submit</button>
+                                            <html:submit   property="submit" value="submit" styleClass="btn btn-success waves-effect">Submit</html:submit>
                                         </div>
                                     </div>
            <!-- end button -->
@@ -272,6 +412,60 @@
 									</html:form>
 
 <!-- end form run code -->
+
+
+<!-- result runcode  -->
+
+ 
+
+ 
+
+<logic:equal name="challengesForm" property="run" value="${param.run }">
+	<h1><label class="label label-success">Result compiler</label></h1>
+	<div class="input">
+         <div class="title">Input</div>
+         
+         <pre><bean:write name="challengesForm" property="inputTestCase"/></pre>
+     </div>
+     
+     <logic:notEqual name="challengesForm" property="outputTestCase" value="inputUser">
+     
+     	<div class="output">
+         <div class="title">Output</div>
+        <pre><bean:write name="challengesForm" property="outputTestCase"/></pre>
+     	</div>
+     	
+     </logic:notEqual>
+     
+     <div class="output">
+         <div class="title">Your Output</div>
+        <pre><bean:write name="challengesForm" property="outputTestCase"/></pre>
+     </div>
+     <div class="output">
+         <div class="title">Error</div>
+        <pre><bean:write name="challengesForm" property="outputTestCase"/></pre>
+     </div>
+</logic:equal>
+<!-- end runcode  -->
+
+<logic:equal name="challengesForm" property="run" value="${param.run }">
+
+<script type="text/javascript">
+$(document).ready(function() {
+	 
+	$('html, body').animate({
+        scrollTop: $(document).height()
+    }, 1500);		 
+	});
+</script>
+
+</logic:equal>
+
+
+
+
+
+
                                 </div>
        <!--/.problem 1-->
 
@@ -317,7 +511,7 @@
 
 
                         <!--Footer-->
-                        <footer class="page-footer center-on-small-only">
+                        <footer class="page-footer center-on-small-only" id="scroll">
 
    <!--Footer Links-->
                             <div class="container-fluid">
@@ -416,6 +610,11 @@
                         <!-- SCRIPTS -->
                         <script type="text/javascript" src="js/compiled.min.js"></script>
                         <script>
+                        
+                        
+                        	
+                       
+                        
                             $(".button-collapse").sideNav();
 
                             var el = document.querySelector('.custom-scrollbar');

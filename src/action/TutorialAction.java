@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.bean.Response;
 import model.bean.Status;
+import model.bean.Tutorial;
 import model.bean.User;
 import model.bo.CategoriesBO;
 import model.bo.StatusBO;
@@ -19,6 +21,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import common.CompilerCode;
 import common.MyCookie;
 import form.TutorialsForm;
 
@@ -28,6 +31,7 @@ public class TutorialAction extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
+	 
 		TutorialsForm tf = (TutorialsForm) form;
 		String cateId = request.getParameter("cateId");
 		String menuId = request.getParameter("menuId");
@@ -75,22 +79,59 @@ public class TutorialAction extends Action {
 		tf.setCateList(categoriesBO.getAllCategories());
 		// set list tutorial
 		TutorialBO tutorialBO = new TutorialBO();
-		tf.setTutList(tutorialBO.getAllTutorialByCateId(cateId));
+
+		ArrayList<Tutorial> tutList = tutorialBO.getAllTutorialByCateId(cateId);
+		tf.setTutList(tutList);
+		if (tutList.size() > 0) {
+			tf.setFirstTutId(tutList.get(0).getTuId() + "");
+		}else{
+			tf.setFirstTutId("0");
+		}
 		// get list tutorial code
 		TutorialCodeBO tutorialCodeBO = new TutorialCodeBO();
 		tf.setTutCodeList(tutorialCodeBO.getAllTutorialCodeByTutId(tutId));
 
 		// tao bien editor mirror code edittor
-		myCookie.setCookie("editor", "html");
+		tf.setEditor("html");
 		if ("7".equals(cateId)) {
-			myCookie.setCookie("editor", "c++");
+
+			tf.setEditor("c++");
 		}
 		if ("8".equals(cateId)) {
-			myCookie.setCookie("editor", "python");
+
+			tf.setEditor("java");
 		}
 		if ("9".equals(cateId)) {
-			myCookie.setCookie("editor", "java");
+			tf.setEditor("python");
 		}
+
+		// compiler and run code
+		String language = request.getParameter("language");
+		String code = tf.getCode();
+
+		if ("c++".equals(language)) {
+
+		}
+		if ("java".equals(language)) {
+
+		}
+		if ("python".equals(language)) {
+
+		}
+
+		tf.setRun("true");
+		
+
+		String result = "Hello World!";
+		// bien dich code va dua vao class response
+		// CompilerCode compilerCode=new CompilerCode(language, code, "");
+		//
+		// Response res=new Response(compilerCode.runCodeC());
+
+		// if (code != null)
+		// result = code;
+
+		tf.setResult(result);
 
 		return mapping.findForward("thanhCong");
 	}

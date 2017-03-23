@@ -17,10 +17,10 @@ public class HomeToPracticsAction extends Action{
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		
 		String map="";
 		String menuId=request.getParameter("menuId");
 		String cateId=request.getParameter("cateId");
+		String tutId=request.getParameter("tutId");
 		
 		if("1".equals(menuId)){
 //			TutorialsForm practicsForm=(TutorialsForm)form;
@@ -29,6 +29,7 @@ public class HomeToPracticsAction extends Action{
 			PracticsForm practicsForm=(PracticsForm)form;
 			request.setAttribute("cateId",cateId);
 			request.setAttribute("menuId",menuId);
+			request.setAttribute("tutId",tutId);
 			map="practics";
 		}
 		return mapping.findForward(map);

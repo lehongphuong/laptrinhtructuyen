@@ -34,24 +34,85 @@
 	color: white;
 }
 
-.menuVertical li a:hover:not (.active ) {
-	background-color: #555;
-	color: white;
-}
+.menuVertical
+ 
+li
+ 
+a
+:hover
+:not
+ 
+(
+.active
+ 
+)
+{
+background-color
+:
+ 
+#555
+;
 
-.menuHori li a:hover:not (.active ) {
+	
+color
+:
+ 
+white
+;
+
+
+}
+.menuHori
+ 
+li
+ 
+a
+:hover
+:not
+ 
+(
+.active
+ 
+)
+{
+background-color
+:
+ 
+#80ced6
+;
+
+	
+color
+:
+ 
+white
+;
+
+	
+font-size
+:
+ 
+20
+px
+;
+
+	
+margin
+:
+ 
+10
+dp
+;
+
+
+}
+.menuActive {
 	background-color: #80ced6;
 	color: white;
 	font-size: 20px;
 	margin: 10dp;
 }
 
-.menuActive{
-	background-color: #80ced6;
-	color: white;
-	font-size: 20px;
-	margin: 10dp;
-}
 .menuHori li a {
 	font-family: "Times New Roman", Times, serif;
 	font-size: 16px;
@@ -111,8 +172,7 @@
 	margin: 20px 0;
 }
 
-w3.css: 230
-.w3-example {
+w3.css: 230 .w3-example {
 	background-color: #f1f1f1;
 	padding: 0.01em 16px;
 }
@@ -121,11 +181,35 @@ w3.css: 230
 	clear: both;
 }
 
-
-.problemConstraint{
+.problemConstraint {
 	text-align: center;
 	margin-bottom: 20px;
 	font-family: "Times New Roman", Times, serif;
 	font-size: 20px;
-	
+}
+
+.myModal {
+	text-align: center;
+	margin-top: 10px;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 20px;
+}
+
+.result {
+	text-align: center;
+	margin-top: 10px;
+	background: #33b5e5;
+	color: #fff;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 20px;
+}
+
+.select-language {
+	text-align: right;
+	float: right; margin-top : 10px;
+	/* background: #ff4444; */
+	color: #ffffff;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 20px;
+	margin-top: 10px;
 }

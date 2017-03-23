@@ -1,10 +1,13 @@
 package action;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.bean.Problem;
 import model.bean.Status;
 import model.bean.User;
 import model.bo.CategoriesBO;
@@ -89,7 +92,8 @@ public class ChallengesAction extends Action {
 
 		// get information for problem page
 		ProblemBO problemBO = new ProblemBO();
-		challengesForm.setProblem(problemBO.getProblemBySubId(subId));
+		Problem problem=problemBO.getProblemBySubId(subId);
+		challengesForm.setProblem(problem);
 
 		// set info for submition with userId and subMit id and after show all
 		SubmitBO submitBO = new SubmitBO();
@@ -99,11 +103,90 @@ public class ChallengesAction extends Action {
 		LeaderBoardBO leaderBoardBO = new LeaderBoardBO();
 		challengesForm.setLeaderList(leaderBoardBO
 				.getAllLeaderbBoardBySubId(subId));
-		
-		//set editorial by submit id
-		EditorialBO editorialBO=new EditorialBO();
+
+		// set editorial by submit id
+		EditorialBO editorialBO = new EditorialBO();
+
 		challengesForm.setEditorial(editorialBO.getAllEditorialBySubId(subId));
 		
+		/**
+		 * khoi tao editor
+		 */
+		String run = request.getParameter("run");
+		String editor = request.getParameter("editor");
+		if (run == null) {
+			// tao bien editor mirror code edittor
+			
+			challengesForm.setEditor("C++");
+			
+			challengesForm.setCodeSample(URLDecoder.decode("%23include+%3Ciostream%3E%0D%0Ausing+namespace+std%3B%0D%0A%0D%0Aint+main%28%29+%7B%0D%0A++++cout%3C%3C%22Helsdf+lo%22%3B%0D%0A++++for%28int+i%3D0%3Bi%3C10%3Bi%2B%2B%29%7B%0D%0A++++++++cout%3C%3Ci%2Ai%3C%3Cendl%3B%0D%0A++++%7D%0D%0A++++return+0%3B%0D%0A%7D"));
+			if ("java".equals(editor)) {
+				challengesForm.setEditor("JAVA");
+				challengesForm.setCodeSample(URLDecoder.decode("import%20java.io.*%3B%0A%0Aclass%20myCode%0A%7B%0A%20%20%20%20public%20static%20void%20main%20(String%5B%5D%20args)%20throws%20java.lang.Exception%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20for(int%20i%3D0%3Bi%3C10%3Bi%2B%2B)System.out.println(%22Hello%20Java%22)%3B%0A%20%20%20%20%7D%0A%7D%0A"));
+			}
+
+			if ("python".equals(editor)) {
+				challengesForm.setEditor("PYTHON");
+				challengesForm.setCodeSample("python sample c++");
+			}
+		}else{
+			 
+			challengesForm.setEditor("C++");
+			 
+			if ("java".equals(editor)) {
+				challengesForm.setEditor("JAVA");
+			 
+			}
+
+			if ("python".equals(editor)) {
+				challengesForm.setEditor("PYTHON");
+				 
+			}
+			
+		}
+		/**
+		 * end khoi tao editor
+		 */
+		
+
+		/**
+		 * run code hoac submit
+		 */
+
+		String submit = challengesForm.getSubmit();
+		if (submit != null) {
+			
+			challengesForm.setRun("true");
+			String codeSample = challengesForm.getCodeSample();
+			String inputUser=challengesForm.getInputUser();
+			
+			if ("runCode".equals(submit)) {
+				// runcode lay gia tri trong code sample xu ly
+				
+				
+				String yourOutput="your output";
+				
+				if(inputUser==null){
+					challengesForm.setInputTestCase(problem.getInputTestCase());
+					challengesForm.setOutputTestCase(problem.getOutputTestCase());
+				}else{
+					challengesForm.setInputTestCase(inputUser);
+					challengesForm.setOutputTestCase("inputUser");
+				}
+				
+				challengesForm.setYourOutput(yourOutput);
+				
+			} else {
+				// submit code
+				System.out.println("submit code " + codeSample);
+
+			}
+			challengesForm.setCodeSample(codeSample);
+		}
+
+		/**
+		 * end run code hoac submit
+		 */
 
 		return mapping.findForward("thanhCong");
 	}

@@ -25,7 +25,7 @@
    <script src="library/clike.js"></script>
    <script src="library/python.js"></script>
    
-   <style>.CodeMirror {border: 5px inset #dee;}</style>
+   <style>.CodeMirror {border: 25px inset #dee;}</style>
    <!-- /mirror editor-->
    
    
@@ -82,18 +82,18 @@
     <div class="menuHori">
       <ul class="nav navbar-nav ml-auto flex-row">
 
-
         <bean:define id="idMenu" name="tutorialForm" property="menuId"></bean:define>
         <bean:define id="idCate" name="tutorialForm" property="cateId"></bean:define>
+        <bean:define id="firstTutId" name="tutorialForm" property="firstTutId"></bean:define>
         <logic:iterate name="tutorialForm" property="cateList" id="cate">
 
         <bean:define id="cateId1" name="cate" property="cateId"></bean:define>
+        
 
         <logic:equal name="cate" property="menuId" value="${idMenu}">
-
         <logic:equal name="tutorialForm" property="cateId" value="${cateId1}">
         <li class="nav-item menuActive">
-          <html:link action="home-to-practics.do?menuId=${idMenu}&cateId=${cateId1}&tutId=1">
+          <html:link action="home-to-practics.do?menuId=${idMenu}&cateId=${cateId1}&tutId=${firstTutId }">
           <span class="hidden-sm-down uppercase"><bean:write name="cate" property="name"/></span>
           </html:link>
         </li>
@@ -101,7 +101,7 @@
 
       <logic:notEqual name="tutorialForm" property="cateId" value="${cateId1 }">
       <li class="nav-item">
-        <html:link action="home-to-practics.do?menuId=${idMenu}&cateId=${cateId1}&tutId=1">
+        <html:link action="home-to-practics.do?menuId=${idMenu}&cateId=${cateId1}&tutId=${firstTutId }">
         <span class="hidden-sm-down uppercase"><bean:write name="cate" property="name"/></span>
         </html:link>
       </li>
@@ -162,12 +162,13 @@
   <div id="leftmenuinner">
     <div id="leftmenuinnerinner">
       <ul class="menuVertical"> 
-        
-       
-        <logic:iterate name="tutorialForm" property="tutList" id="tut">
+      
+     
+<!-- menu left -->
+	
+   <logic:iterate name="tutorialForm" property="tutList" id="tut">
         <bean:define id="tutId" name="tut" property="tuId"></bean:define>
-        
-        
+     
        <logic:equal name="tut" property="tuId" value="${param.tutId}">
         <li><h5><a class="active" href="home-to-practics.do?menuId=${param.menuId}&cateId=${param.cateId}&tutId=${tutId}"><bean:write name="tut" property="title"/></a></h5></li>
       </logic:equal>
@@ -205,7 +206,7 @@
     </div>
     <!-- End Ezoic - Leaderboard - top_of_page -->
     <h1>HTML  Elements </h1>
-    asdf ${cookie.editor}
+    
     
     <div class="w3-clear nextprev">
       <a class="btn btn-outline-primary waves-effect"
@@ -215,6 +216,7 @@
     </div>
     <hr>
 
+    <bean:define id="editor" name="tutorialForm" property="editor"/>
     
     <logic:iterate name="tutorialForm" property="tutCodeList" id="tutCode">
     
@@ -223,29 +225,188 @@
     <h2><bean:write name="tutCode" property="title"/></h2>
     <P><bean:write name="tutCode" property="description"/></P>
     
-    <div><textarea id="code-html${tutCodeId}" name="code-html${tutCodeId }">
+     
+     
+     <logic:notEqual name="tutCode" property="code" value="">
+     	
+<!-- html -->
+	
+     	
+     	<logic:equal name="tutorialForm" property="editor" value="html">
+     	<h4><span class="label label-info">HTML editor</span></h4>
+     	
+     	<div><textarea id="code-html${tutCodeId}" name="code-html${tutCodeId }">
 <bean:write name="tutCode" property="code"/>
-    </textarea></div>
+	    </textarea></div>
+	    
+	    <script type="text/javascript">
+	     var editor = CodeMirror.fromTextArea(document.getElementById("code-html${tutCodeId }"), {
+	       mode: {name: "htmlmixed",
+	       version: 3,
+	       singleLineStringErrors: false},
+	       lineNumbers: true,
+	       indentUnit: 4,
+	       matchBrackets: true
+	     });
+	   </script>
+	   
+	   <a class="btn btn-info btn-rounded waves-effect waves-light"  target="_blank"
+	   href="run-html.do?menuId=${param.menuId}&cateId=${param.cateId}&tutId=${param.tutId}&tutCodeId=${tutCodeId}">
+	   Run code</a>
+	   <br><br><br>
+     	
+     	</logic:equal>
+     	
+<!-- end html -->
+     	
+<!-- c++ -->
+     	
+     	<logic:equal name="tutorialForm" property="editor" value="c++">
+     	<h4><span class="label label-info">C++ editor</span></h4>
+     	<bean:define id="code" name="tutCode" property="code"/>
+     	
+	   <html:form action="/list-tutorial.do?menuId=${param.menuId}&cateId=${param.cateId}&tutId=${param.tutId}&tutCodeId=${tutCodeId}&language=c++&run=true"
+	    method="post">   
+	   <html:textarea name="tutorialForm" property="code" value="${code}" styleId="code-html${tutCodeId}">
+ 
+	   </html:textarea>
+	
+	    <script type="text/javascript">
+	     var editor = CodeMirror.fromTextArea(document.getElementById("code-html${tutCodeId }"), {
+	    	 lineNumbers: true,
+	         matchBrackets: true,
+	         mode: "text/x-c++src"
+	     });
+	   </script>
+	   		<html:submit styleClass="btn btn-info btn-rounded waves-effect waves-light"  >
+	   Run code</html:submit>
+	   	 
+	   </html:form>
+	   
+     	<br><br><br>
+     	</logic:equal>
+     	
+<!-- end c++ -->
+     	
+<!-- python -->
+
+		<logic:equal name="tutorialForm" property="editor" value="python">
+     	<h4><span class="label label-info">Python editor</span></h4>
+     	<bean:define id="code" name="tutCode" property="code"/>
+     	
+	   <html:form action="/list-tutorial.do?menuId=${param.menuId}&cateId=${param.cateId}&tutId=${param.tutId}&tutCodeId=${tutCodeId}&language=python&run=true"
+	    method="post">   
+	   <html:textarea name="tutorialForm" property="code" value="${code}" styleId="code-html${tutCodeId}">
+ 
+	   </html:textarea>
+	
+	    <script type="text/javascript">
+	     var editor = CodeMirror.fromTextArea(document.getElementById("code-html${tutCodeId }"), {
+	    	 mode: {name: "python",
+	   	      version: 3,
+	   	      singleLineStringErrors: false},
+	   	      lineNumbers: true,
+	   	      indentUnit: 4,
+	   	      matchBrackets: true
+	     });
+	   </script>
+	   		<html:submit styleClass="btn btn-info btn-rounded waves-effect waves-light"  >
+	   Run code</html:submit>
+	   	 
+	   </html:form>
+	   
+     	<br><br><br>
+     	</logic:equal>
+     	
+<!-- end python -->
+     	
+<!-- java --> 
+     	
+     	<logic:equal name="tutorialForm" property="editor" value="java">
+     	<h4><span class="label label-info">Java editor</span></h4> 
+     	<bean:define id="code" name="tutCode" property="code"/>
+     	
+	   <html:form action="/list-tutorial.do?menuId=${param.menuId}&cateId=${param.cateId}&tutId=${param.tutId}&tutCodeId=${tutCodeId}&language=java&run=true"
+	    method="post">   
+	   <html:textarea name="tutorialForm" property="code" value="${code}" styleId="code-html${tutCodeId}">
+ 
+	   </html:textarea>
+	
+	    <script type="text/javascript">
+	     var editor = CodeMirror.fromTextArea(document.getElementById("code-html${tutCodeId }"), {
+	    	 lineNumbers: true,
+	         matchBrackets: true,
+	         mode: "text/x-java"
+	     });
+	   </script>
+	   		<html:submit styleClass="btn btn-info btn-rounded waves-effect waves-light"  >
+	   Run code</html:submit>
+	   	 
+	   </html:form>
+	   
+     	<br><br><br>
+     	</logic:equal>
+     	
+<!-- end java --> 
+     	
+     	
+	</logic:notEqual>
+  
     
-    <script type="text/javascript">
-     var editor = CodeMirror.fromTextArea(document.getElementById("code-html${tutCodeId }"), {
-       mode: {name: "htmlmixed",
-       version: 3,
-       singleLineStringErrors: false},
-       lineNumbers: true,
-       indentUnit: 4,
-       matchBrackets: true
-     });
-   </script>
-   
-   <a class="btn btn-info btn-rounded waves-effect waves-light"  target="_blank"
-   href="run-html.do?menuId=${param.menuId}&cateId=${param.cateId}&tutId=${param.tutId}&tutCodeId=${tutCodeId}">
-   Run code</a>
-   <br><br><br> 
+    
    
  </logic:iterate>
  
 
+ 
+ <!-- Modal result code -->
+         <div class="modal fade modal-ext myModal" id="modal-result" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+             <div class="modal-dialog" role="document">
+                 <!--Content-->
+                 <div class="modal-content">
+                     <!--Header-->
+                     <div class="modal-header">
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+       <span aria-hidden="true">&times;</span>
+   </button>
+   						<br><br><br><br><br><br>
+                         <h3 class="w-100"><span class="label label-info">Result Compile & Excute Code</span></h3>
+                     </div>
+                     <!--Body-->
+                     
+                     <bean:define id="result" name="tutorialForm" property="result"/>
+                     <div class="md-form container result">
+                     
+                     	<label for="form7">Output</label>
+                     	<html:textarea property="result"  styleClass="md-textarea" value="${result }">
+                     
+                    	 </html:textarea>
+                     	
+						    
+						</div>
+                     <!--Footer-->
+                     <div class="modal-footer">
+                         <div class="options text-right">
+                           
+                         </div>
+                         <button type="button" class="btn btn-default ml-auto" data-dismiss="modal">Close</button>
+                     </div>
+                 </div>
+                 <!--/.Content-->
+             </div>
+         </div>
+	
+	<logic:equal name="tutorialForm" property="run" value="${param.run}">
+	
+	 <script type="text/javascript">
+     $("#modal-result").modal("show");
+    </script>
+    
+    
+	</logic:equal>
+
+   
+     
 
 
 
