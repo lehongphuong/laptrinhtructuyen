@@ -53,7 +53,7 @@
 					   <script src="library/clike.js"></script>
 					   <script src="library/python.js"></script>
 					   
-					   <style>.CodeMirror {border: 25px inset #dee;}</style>
+					   <style>.CodeMirror {border: 5px inset #dee;}</style>
 					   <!-- /mirror editor-->
 
                     </head>
@@ -248,16 +248,15 @@
                                     
                                     
 <!-- form run code -->
- 
-<div class="col-lg-3 select-language">
+<div class="col-lg-3 select-language btn-outline-default">
  <label for="sel1">SELECT LANGUAGE:</label>
  <html:select name="challengesForm" styleClass="form-control" property="editor" styleId="sel1">
    <html:option value="C++">C++</html:option>
    <html:option value="JAVA">JAVA</html:option>
    <html:option value="PYTHON">PYTHON</html:option>
  </html:select>
-
 </div>
+ 
 
 <html:form action="/chanllenges.do?subId=${param.subId}&menuId=${param.menuId}&cateId=${param.cateId}&editor=c++" styleId="c++">
 
@@ -294,12 +293,14 @@ $(document).ready(function() {
 <br><br>
 
 
-<html:form   action="/chanllenges.do?subId=${param.subId}&menuId=${param.menuId}&cateId=${param.cateId}&editor=${param.editor}&run=true" >
+<html:form  action="/chanllenges.do?subId=${param.subId}&menuId=${param.menuId}&cateId=${param.cateId}&editor=${param.editor}&run=true" >
  
 <!-- c++ -->
      	
      	<logic:equal name="challengesForm" property="editor" value="C++">
-     	<h4><span class="label label-info">C++ EDITOR</span></h4><br>
+     	<a class="btn btn-outline-default btn-xlg waves-effect waves-light">C++ EDITOR</a>
+     	 
+     	 
      	
 	   <html:textarea name="challengesForm" property="codeSample"  styleId="code-c++">
  
@@ -322,7 +323,7 @@ $(document).ready(function() {
 <!-- python -->
 
 		<logic:equal name="challengesForm" property="editor" value="PYTHON">
-     	<h4><span class="label label-info">PYTHON EDITOR</span></h4><br>
+     	<a class="btn btn-outline-default btn-xlg waves-effect waves-light">PYTHON EDITOR</a>
     <html:textarea name="challengesForm" property="codeSample"   styleId="code-python">
  
 	   </html:textarea>
@@ -348,7 +349,7 @@ $(document).ready(function() {
 <!-- java --> 
      	
      	<logic:equal name="challengesForm" property="editor" value="JAVA">
-     	<h4><span class="label label-info">JAVA EDITOR</span></h4><br>
+     	<a class="btn btn-outline-default btn-xlg waves-effect waves-light">JAVA EDITOR</a>
    
 	   <html:textarea name="challengesForm" property="codeSample"  styleId="code-java">
  
@@ -400,10 +401,10 @@ $(document).ready(function() {
 
                                         </div>
                                         <div class="p-2">
-                                            <html:submit  property="submit" value="runCode" styleClass="btn btn-outline-default waves-effect">Run code</html:submit>
+                                            <html:submit  property="submit" value="runCode" styleClass="btn btn-outline-default waves-effect">RUN CODE</html:submit>
                                         </div>
                                         <div class="p-2">
-                                            <html:submit   property="submit" value="submit" styleClass="btn btn-success waves-effect">Submit</html:submit>
+                                            <html:submit   property="submit" value="submit" styleClass="btn btn-success waves-effect">COMMIT</html:submit>
                                         </div>
                                     </div>
            <!-- end button -->
@@ -416,13 +417,9 @@ $(document).ready(function() {
 
 
 <!-- result runcode  -->
-
- 
-
- 
-
-<logic:equal name="challengesForm" property="run" value="${param.run }">
+<logic:equal name="challengesForm" property="run" value="runCode">
 	<h1><label class="label label-success">Result compiler</label></h1>
+	
 	<div class="input">
          <div class="title">Input</div>
          
@@ -449,7 +446,41 @@ $(document).ready(function() {
 </logic:equal>
 <!-- end runcode  -->
 
-<logic:equal name="challengesForm" property="run" value="${param.run }">
+
+
+
+<!-- result submit code -->
+<logic:equal name="challengesForm" property="run" value="submit">
+
+	<h1><label class="label label-success">Result Commit</label></h1>
+	<div class="input">
+         <div class="title">Input</div>
+         
+         <pre><bean:write name="challengesForm" property="inputTestCase"/></pre>
+     </div>
+     
+     <logic:notEqual name="challengesForm" property="outputTestCase" value="inputUser">
+     
+     	<div class="output">
+         <div class="title">Output</div>
+        <pre><bean:write name="challengesForm" property="outputTestCase"/></pre>
+     	</div>
+     	
+     </logic:notEqual>
+     
+     <div class="output">
+         <div class="title">Your Output</div>
+        <pre><bean:write name="challengesForm" property="outputTestCase"/></pre>
+     </div>
+     <div class="output">
+         <div class="title">Error</div>
+        <pre><bean:write name="challengesForm" property="outputTestCase"/></pre>
+     </div>
+</logic:equal>
+<!-- end submit code  -->
+
+
+<logic:notEqual name="challengesForm" property="run" value="false">
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -460,7 +491,7 @@ $(document).ready(function() {
 	});
 </script>
 
-</logic:equal>
+</logic:notEqual>
 
 
 
@@ -534,7 +565,7 @@ $(document).ready(function() {
 
 
                         <!--Footer-->
-                        <footer class="page-footer center-on-small-only" id="scroll">
+                        <footer class="page-footer center-on-small-only">
 
    <!--Footer Links-->
                             <div class="container-fluid">

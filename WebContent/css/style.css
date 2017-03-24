@@ -47,7 +47,7 @@ background-color :#555;
 }
 
 .menuActive {
-	background-color: #80ced6;
+	background-color: #33b5e5;
 	color: white;
 	font-size: 20px;
 	margin: 10dp;
@@ -149,7 +149,7 @@ w3.css: 230 .w3-example {
 	text-align: right;
 	float: right;
 	margin-top: 10px;
-	background: #ff4444;
+	 
 	color: #ffffff;
 	font-family: "Times New Roman", Times, serif;
 	font-size: 20px;

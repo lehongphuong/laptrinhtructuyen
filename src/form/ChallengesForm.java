@@ -57,7 +57,7 @@ public class ChallengesForm extends ActionForm {
 	// khai bao cac bien moi
 	private String editor;
 	private String codeSample;
-	private String run="true";
+	private String run;
 	private String yourOutput;
 	private String error;
 

@@ -152,6 +152,7 @@ public class ChallengesAction extends Action {
 		/**
 		 * run code hoac submit
 		 */
+		challengesForm.setRun("false");
 
 		String submit = challengesForm.getSubmit();
 		if (submit != null) {
@@ -162,7 +163,7 @@ public class ChallengesAction extends Action {
 			
 			if ("runCode".equals(submit)) {
 				// runcode lay gia tri trong code sample xu ly
-				
+				challengesForm.setRun("runCode");
 				
 				String yourOutput="your output";
 				
@@ -178,6 +179,7 @@ public class ChallengesAction extends Action {
 				
 			} else {
 				// submit code
+				challengesForm.setRun("submit");
 				System.out.println("submit code " + codeSample);
 
 			}
